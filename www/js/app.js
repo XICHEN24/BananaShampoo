@@ -77,8 +77,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'AccountCtrl'
       }
     }
-  });
+  })
 
+  .state('tab.userprofile', {
+    url: '/userprofile',
+    views: {
+      'tab-userprofile': {
+        templateUrl: 'templates/tab-userprofile.html',
+        controller: 'UserProfileCtrl'
+      }
+    }
+  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
