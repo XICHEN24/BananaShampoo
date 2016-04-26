@@ -21,8 +21,27 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+//.controller('PostCtrl', function($scope) {
+  //$scope.settings = {
+  //  enableFriends: true
+  //};
+//})
+
+.controller('PostCtrl', function($scope) {
+  $scope.post = {
+    name: '',
+    category: 'Life',
+    description: '',
+    assignedUser: '',
+    assignedUserName: 'unassigned',
+    completed: false
   };
+
+  $scope.submitPost = function () {
+    Post.create($scope.post).success(function (data) {
+      window.location.replace("#/tab/dash");
+    }).error(function (e) {
+      alert(e.message)
+    });
+  }
 });
