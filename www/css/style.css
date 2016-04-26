@@ -1,15 +1,27 @@
 /* Empty. Add your own CSS if you like */
 
 
+.userInformation {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+
 .userImage {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
   width: 200px;
   height: 200px;
   border-radius: 50%;
   background-image: url('../stud.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  border-width: 2px;
 }
 
 .placeholder {
   background-color: red;
+  border-width: 1px;
 }

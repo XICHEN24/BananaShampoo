@@ -1,37 +1,46 @@
 <ion-view view-title="User Profile">
   <ion-content class="padding">
-    <div class="row">
-      <div class="col col-20 userData">
+    <div class="row responsive-md">
+      <div class="col col-20 userData text-center">
         <div class="userImage">
 
         </div>
         <div class="userInformation">
           <h3> Name: {{ user.name  }}</h3>
           <h3> Contact Email: {{ user.email }}</h3>
-          <h3> User since {{user.dateCreated | date:'yyyy-MM-dd' }}</h3>
+          <h7> User since {{user.dateCreated | date:'yyyy-MM-dd' }}</h7>
         </div>
+        <div class="button">
+          Change Picture
+        </div>
+        <div id="hidden-resizer" style="visibility: hidden"></div>
       </div>
-      <div class="col placeholder">
+      <div class="col col-80 placeholder">
         <div>
           <h1>
             Notifications
           </h1>
-          <div class="single-item">
-            <div>your content 1</div>
-            <div>your content 2</div>
-            <div>your content 3</div>
+          <div>
+            <div class="notifications" ng-repeat="notification in user.notifications">
+              {{ notification }}
+            </div>
           </div>
-
         </div>
         <div>
           <h1>
             My Listings
           </h1>
+          <div class="myTasks" ng-repeat="task in user.pendingTasks">
+            {{ task }}
+          </div>
         </div>
         <div>
           <h1>
             Interested Listings
           </h1>
+          <div class="interestedTasks" ng-repeat="task in user.interestedTasks">
+            {{ task }}
+          </div>
         </div>
       </div>
     </div>
