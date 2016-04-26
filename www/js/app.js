@@ -59,6 +59,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+    .state('tab.category', {
+      url: '/category',
+      views: {
+        'tab-category': {
+          templateUrl: 'templates/tab-category.html',
+          controller: 'CategoryCtrl'
+        }
+      }
+    })
+    .state('tab.category-detail', {
+      url: '/category/:_id',
+      views: {
+        'tab-category': {
+          templateUrl: 'templates/category-detail.html',
+          controller: 'CategoryDetailCtrl'
+        }
+      }
+    })
     .state('tab.chat-detail', {
       url: '/chats/:chatId',
       views: {

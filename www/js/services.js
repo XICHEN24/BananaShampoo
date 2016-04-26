@@ -47,4 +47,26 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+.factory('Users', function($http, $window) {
+  return {
+    get : function() {
+      var baseUrl = $window.sessionStorage.baseurl;
+      console.log(baseUrl);
+      return $http.get(baseUrl+'/api/users');
+    },
+    post : function(user) {
+      var baseUrl = $window.sessionStorage.baseurl;
+      return $http.post(baseUrl+'/api/users', user);
+    },
+    delete : function(id) {
+      var baseUrl = $window.sessionStorage.baseurl;
+      return $http.delete(baseUrl+'/api/users/'+id);
+    },
+    getquery : function(query) {
+      var baseUrl = $window.sessionStorage.baseurl;
+      console.log(baseUrl);
+      return $http.get(baseUrl+'/api/users'+query);
+    }
+  }
 });

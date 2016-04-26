@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+.list{
+//text-align:center;
+
+  //padding-left: 180px;
+  //padding-right: 180px;
+  //padding-top:0px;
+  font-weight: bold;
+  .item{
+    color:blue;
+  }
+}

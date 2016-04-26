@@ -1,0 +1,78 @@
+<ion-view view-title="Category" ng-controller='CategoryCtrl'>
+  <ion-pane>
+    <ion-content>
+
+      <div class="button-bar">
+        <a class="button button-positive" ng-click=showStudy()><i class="icon ion-ios-book"></i>Study</a>
+        <a class="button button-assertive" ng-click=showSports()><i class="icon ion-ios-basketball"></i>Sports</a>
+        <a class="button button-energized" ng-click=showFood()><i class="icon ion-ios-nutrition"></i>Food</a>
+        <a class="button button-calm" ng-click=showDaily()><i class="icon ion-ios-cart"></i>Daily</a>
+        <a class="button button-royal" ng-click=showTravel()><i class="icon ion-android-car"></i>Travel</a>
+        <a class="button button-balanced" ng-click=showRent()><i class="icon ion-bag"></i>Rent</a>
+        <a class="button button-assertive" ng-click=showExchange()><i class="icon ion-chatbubbles"></i>Exchange</a>
+
+      </div>
+      <div class="list">
+        <ion-list>
+          <ion-item ng-show="studytask==true" ng-repeat="task in study| limitTo:studylimit">
+            <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task._id}}">{{task.name}}</a></div>
+          </ion-item>
+          <button class="button button-energized button-small" ng-show="studytask==true&&studylimit==5" ng-click=setStudyLimit(0)>Show More</button>
+        </ion-list>
+
+        <ion-list>
+          <ion-item ng-show="sporttask==true" ng-repeat="task in sport | limitTo:sportlimit">
+            <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;{{task.name}}</div>
+          </ion-item>
+          <button class="button button-energized button-small" ng-show="sporttask==true&&sportlimit==5" ng-click=setSportLimit(0)>Show More</button>
+        </ion-list>
+
+        <ion-list>
+          <ion-item ng-show="foodtask==true" ng-repeat="task in food | limitTo:foodlimit">
+            <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;{{task.name}}</div>
+          </ion-item>
+          <button class="button button-energized button-small" ng-show="foodtask==true&&foodlimit==5" ng-click=setFoodLimit(0)>Show More</button>
+        </ion-list>
+
+        <ion-list>
+          <ion-item ng-show="dailytask==true" ng-repeat="task in daily | limitTo:dailylimit">
+            <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;{{task.name}}</div>
+          </ion-item>
+          <button class="button button-energized button-small" ng-show="dailytask==true&&dailylimit==5" ng-click=setDailyLimit(0)>Show More</button>
+        </ion-list>
+
+        <ion-list>
+          <ion-item ng-show="traveltask==true" ng-repeat="task in travel | limitTo:travellimit">
+            <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;{{task.name}}</div>
+          </ion-item>
+          <button class="button button-energized button-small" ng-show="traveltask==true&&travellimit==5" ng-click=setTravelLimit(0)>Show More</button>
+        </ion-list>
+
+        <ion-list>
+          <ion-item ng-show="renttask==true" ng-repeat="task in rent | limitTo:rentlimit">
+            <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;{{task.name}}</div>
+          </ion-item>
+          <button class="button button-energized button-small" ng-show="renttask==true&&rentlimit==5" ng-click=setRentLimit(0)>Show More</button>
+        </ion-list>
+
+        <ion-list>
+          <ion-item ng-show="exchangetask==true" ng-repeat="task in exchange | limitTo:exchangelimit">
+            <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;{{task.name}}</div>
+          </ion-item>
+          <button class="button button-energized button-small" ng-show="exchangetask==true&&exchangelimit==5" ng-click=setExchangeLimit(0)>Show More</button>
+        </ion-list>
+
+
+      </div>
+    </ion-content>
+  </ion-pane>
+  <!--
+  <ion-content>
+    <ion-list>
+      <ion-toggle  ng-model="settings.enableFriends">
+        Enable Friends
+      </ion-toggle>
+    </ion-list>
+  </ion-content>
+  -->
+</ion-view>
