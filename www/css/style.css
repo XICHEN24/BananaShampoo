@@ -1,1 +1,15 @@
 /* Empty. Add your own CSS if you like */
+
+
+.userImage {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-image: url('../stud.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.placeholder {
+  background-color: red;
+}

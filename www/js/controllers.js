@@ -27,8 +27,30 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('UserProfileCtrl', function($scope) {
+
+  /*
+
+   name: {type:String, required:[true, "UserName is required!"]},
+   email: {type:String, required:[true, "Email is required!"], unique:true},
+   password: {type: String, require:[true, "Password is required at least one capital letter, and at least 6 characters!"]},
+   pendingTasks: {type:[String], default: []},
+   interestedTasks: {type:[String], default: []},
+   notifications: {type:[String], default: []},
+   dateCreated: { type: Date, default: Date.now}
+
+   */
+  console.log(new Date())
+  userDate = new Date();
+
+  $scope.user = { name: "Stefan Dao",
+    email: "sdao2@illinois.edu",
+    password: "Probably shouldn't be in plaintext",
+    pendingTasks: ['MyTask1', 'MyTask2'],
+    interestedTasks: ["Eat chicken", "Dont eat chicken", "Make a cheesecake"],
+    notifications: ["Hey guys", "This is a placeholder"],
+    dateCreated: userDate,
+  }
+
+
 });
