@@ -27,7 +27,7 @@ angular.module('starter.controllers', ['ngCookies'])
                //console.log($scope.currentUser.password);
                passwordTrue = true;
                $cookies.put('userId', $scope.currentUser._id);
-               console.log($scope.currentUser._id);
+               //console.log($scope.currentUser._id);
                //var temp = $cookies.get('userId');
                //console.log(temp);
                //if(password)
@@ -90,7 +90,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
 }])
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('ChatsCtrl', function($scope, Chats, $cookies) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -99,6 +99,8 @@ angular.module('starter.controllers', ['ngCookies'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
+  var temp = $cookies.get('userId');
+  console.log(temp);
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
     Chats.remove(chat);
