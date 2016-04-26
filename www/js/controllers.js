@@ -1,6 +1,6 @@
-angular.module('starter.controllers', ['ngCookies'])
+angular.module('starter.controllers', [])
 
-  .controller('userSignIn', ['$scope', '$http', 'Users', '$window','$sce', '$cookies',function($scope, $http, Users, $window, $sce, $cookies){
+  .controller('userSignIn', ['$scope', '$http', 'Users', '$window','$sce',function($scope, $http, Users, $window, $sce){
 
     $scope.formEmail = {text:""}
     $scope.formPassword = {text:""}
