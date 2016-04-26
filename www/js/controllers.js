@@ -1,6 +1,6 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngCookies'])
 
-  .controller('userSignIn', ['$scope', '$http', 'Users', '$window','$sce',function($scope, $http, Users, $window, $sce){
+  .controller('userSignIn', ['$scope', '$http', 'Users', '$window','$sce', '$cookies', function($scope, $http, Users, $window, $sce, $cookies){
 
     $scope.formEmail = {text:""}
     $scope.formPassword = {text:""}
@@ -20,13 +20,16 @@ angular.module('starter.controllers', [])
          for (var i =0; i <$scope.user.length;i++) {
            if (email == $scope.user[i].email) {
              emailTrue = true;
-             console.log("I am here!!");
+             //console.log("I am here!!");
              if (password == $scope.user[i].password) {
                $scope.currentUser = $scope.user[i];
-               console.log($scope.currentUser.email);
-               console.log($scope.currentUser.password);
+               //console.log($scope.currentUser.email);
+               //console.log($scope.currentUser.password);
                passwordTrue = true;
-               //$cookies.put('userId', $scope.currentUser);
+               $cookies.put('userId', $scope.currentUser._id);
+               console.log($scope.currentUser._id);
+               //var temp = $cookies.get('userId');
+               //console.log(temp);
                //if(password)
                //   $scope.UserSignedIn = $sce.trustAsHtml('Nice to see you again, ' + $scope.currentUser.name);
                break;
