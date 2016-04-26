@@ -1,1 +1,12 @@
 /* Empty. Add your own CSS if you like */
+#formData {
+  text-align: left;
+  float:left;
+}
+
+#submitButton {
+  color: white;
+  background-color: green;
+  font-size: 1.5rem;
+  text-align: left;
+}
