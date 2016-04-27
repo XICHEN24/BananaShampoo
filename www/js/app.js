@@ -87,12 +87,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-  .state('tab.account', {
-    url: '/account',
+  //.state('tab.post', {
+  //  url: '/post',
+  //  views: {
+  //    'tab-account': {
+  //      templateUrl: 'templates/tab-post.html',
+  //      controller: 'PostCtrl'
+  //    }
+  //  }
+  //})
+
+  .state('tab.post', {
+    url: '/post',
     views: {
       'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+        templateUrl: 'templates/tab-task.html',
+        controller: 'PostCtrl'
       }
     }
   });

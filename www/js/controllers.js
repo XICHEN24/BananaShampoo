@@ -268,6 +268,7 @@ angular.module('starter.controllers', [])
   }
 
 }])
+
 .controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
   $http.get('http://localhost:4000/api/tasks/'+$stateParams._id).success(function(data){
     $scope.taskdetail = data.data;
@@ -283,23 +284,23 @@ angular.module('starter.controllers', [])
   }).error(function(err){
     console.log(err);
   });
-
-
-
 }])
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
+
+.controller('PostCtrl', function($scope) {
+  $scope.post = {
+    name: '',
+    category: 'Life',
+    description: '',
+    assignedUser: '',
+    assignedUserName: 'unassigned',
+    completed: false
   };
+
+  $scope.submitPost = function () {
+    Post.create($scope.post).success(function (data) {
+      window.location.replace("#/tab/dash");
+    }).error(function (e) {
+      alert(e.message)
+    });
+  }
 });
-/*
-.controller('SettingsController', ['$scope' , '$window' , function($scope, $window) {
-    $scope.url = $window.sessionStorage.baseurl;
-
-    $scope.setUrl = function(){
-      $window.sessionStorage.baseurl = $scope.url;
-      $scope.displayText = "URL set";
-
-    };
-}]);
-*/

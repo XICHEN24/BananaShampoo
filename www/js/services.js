@@ -1,5 +1,13 @@
 angular.module('starter.services', [])
 
+.factory('Post', function($http) {
+  return {
+    create: function(data) {
+      return $http.post('localhost:4000/tasks', data);
+    }
+  }
+})
+
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
 
