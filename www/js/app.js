@@ -87,16 +87,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-  //.state('tab.post', {
-  //  url: '/post',
-  //  views: {
-  //    'tab-account': {
-  //      templateUrl: 'templates/tab-post.html',
-  //      controller: 'PostCtrl'
-  //    }
-  //  }
-  //})
-
   .state('tab.post', {
     url: '/post',
     views: {
@@ -105,8 +95,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         controller: 'PostCtrl'
       }
     }
-  });
+  })
 
+  .state('tab.userprofile', {
+    url: '/userprofile',
+    views: {
+      'tab-userprofile': {
+        templateUrl: 'templates/tab-userprofile.html',
+        controller: 'UserProfileCtrl'
+      }
+    }
+  });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
