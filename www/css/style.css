@@ -1,6 +1,7 @@
 /* Empty. Add your own CSS if you like */
-#formData {
-  text-align: left;
+.formData {
+  color:blue;
+  text-align: center;
   float:left;
 }
 

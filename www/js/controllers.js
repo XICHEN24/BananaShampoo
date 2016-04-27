@@ -61,6 +61,7 @@ angular.module('starter.controllers', ['ngCookies'])
   $scope.formName = {text: ""}
   $scope.formEmail = {text:""}
   $scope.formPassword = {text:""}
+  $scope.failMessage = "";
   /*
   Users.get().success(function(data) {
       $scope.Users = data;
@@ -77,15 +78,19 @@ angular.module('starter.controllers', ['ngCookies'])
     console.log($scope.formEmail.text)
     console.log($scope.formPassword.text)
     var user = { name: $scope.formName.text, email: $scope.formEmail.text, password: $scope.formPassword.text};
-    Users.post(user);
-  };
+    Users.post(user).success(function(data, status){
+      $scope.submitForm = function(isValid) {
+        // check to make sure the form is completely valid
+        if (isValid) {
+          //alert('User '+ $scope.formName.text +' has been add');
+          $scope.UserAdded = $sce.trustAsHtml('User "' + $scope.formName.text + '" has been add');
+        }
+      };
+      $window.location.href = '/index.html#/tab/chats';
 
-  $scope.submitForm = function(isValid) {
-    // check to make sure the form is completely valid
-    if (isValid) {
-      //alert('User '+ $scope.formName.text +' has been add');
-      $scope.UserAdded = $sce.trustAsHtml('User "' + $scope.formName.text + '" has been add');
-    }
+    }).error(function(err){
+        $scope.failMessage = "The Email you entered has been registered";
+    });
   };
 
 }])

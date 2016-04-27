@@ -1,12 +1,13 @@
-<ion-view view-title="BananaShampoo">
+<ion-view view-title="User Sign Up">
   <ion-content class="padding">
-
-    <div id="addUser-form" class="row">
+    <div style="background-color: white;">
+      <div style="width:400px;margin:0 auto;">
+        <img src="../img/sharing.jpg" style="width: 300px; height:250px;">
+        <div id="addUser-form" class="row">
 
         <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
           <div class="form-group">
             <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-            <hr>
             <h3>Name<span style="color:red;margin-right: 100px;">*</span></h3>
             <hr>
             <input type="text" class="form-control input-lg text-center" placeholder="Your Name" name="name" ng-model="formName.text" style="resize:horizontal; width:300px;" required>
@@ -25,10 +26,13 @@
           </div>
           <!-- createUser() WILL CREATE NEW USERS -->
           <button id="submitButton" type="submit" class="button" ng-click="createUser()" ng-disabled="userForm.$invalid">Sign Up</button>
+          <h3 style="color:red;">{{failMessage}}</h3>
           <p ng-bind-html="UserAdded" class="help-block" style="color:white; background-color:green; font-size: 1.5em; width: 350px;"></p>
           <p>You need to enter an valid email, and valid password and non-empty name in order to submit</p>
         </form>
 
+        </div>
+      </div>
     </div>
   </ion-content>
 </ion-view>
