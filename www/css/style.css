@@ -36,3 +36,17 @@
   background-color: red;
   border-width: 1px;
 }
+
+/* Empty. Add your own CSS if you like */
+.formData {
+  color:blue;
+  text-align: center;
+  float:left;
+}
+
+#submitButton {
+  color: white;
+  background-color: green;
+  font-size: 1.5rem;
+  text-align: left;
+}
