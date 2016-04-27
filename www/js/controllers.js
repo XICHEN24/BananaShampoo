@@ -271,10 +271,21 @@ angular.module('starter.controllers', [])
 .controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
   $http.get('http://localhost:4000/api/tasks/'+$stateParams._id).success(function(data){
     $scope.taskdetail = data.data;
-    console.log(data);
+    $scope.message = $scope.taskdetail.messages;
+    //console.log(data);
+    $http.get('http://localhost:4000/api/users/'+$scope.taskdetail.assignedUser).success(function(data){
+      $scope.userdetail = data.data;
+      console.log(data);
+    }).error(function(err){
+      console.log(err);
+    });
+
   }).error(function(err){
     console.log(err);
   });
+
+
+
 }])
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
