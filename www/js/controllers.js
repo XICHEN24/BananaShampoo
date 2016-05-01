@@ -39,8 +39,6 @@ angular.module('starter.controllers', ['ngCookies'])
          if (emailTrue && passwordTrue) {
            $window.location.href = '/index.html#/tab/userprofile';
          }
-
-
          if(!emailTrue)
            errorMessage = "The email you enter is not exists, please try again!";
          else

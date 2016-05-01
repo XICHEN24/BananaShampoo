@@ -22,6 +22,10 @@
         </div>
         <!-- createUser() WILL CREATE NEW USERS -->
         <button id="submitButton" type="submit" class="button" ng-click="userSignIn()" ng-disabled="userSignInForm.$invalid">Log In</button>
+        <hr>
+        <h3>Do not have an account yet?</h3>
+        <a class="button" ng-href="#/tab/signUp" style="text-decoration-color: none;">Click Here to Sign Up!</a>
+
         <p ng-bind-html="UserSignedIn" class="help-block" style="color:white; background-color:green; font-size: 1.5em; width: 350px;"></p>
         <p ng-bind-html="errorPopUp" class="help-block" style="color:white; background-color:red; font-size: 1.5em; width: 350px;"></p>
         <p>You need to enter an valid email, and valid password in order to submit</p>
