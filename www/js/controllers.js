@@ -425,34 +425,74 @@ angular.module('starter.controllers', ['ngCookies'])
   }
 }])
 
-.controller('UserProfileCtrl', function($scope, $cookies) {
-
-  /*
-
-   name: {type:String, required:[true, "UserName is required!"]},
-   email: {type:String, required:[true, "Email is required!"], unique:true},
-   password: {type: String, require:[true, "Password is required at least one capital letter, and at least 6 characters!"]},
-   pendingTasks: {type:[String], default: []},
-   interestedTasks: {type:[String], default: []},
-   notifications: {type:[String], default: []},
-   dateCreated: { type: Date, default: Date.now}
-
-   */
-
-  $scope.user = { name: "Stefan Dao",
-    email: "sdao2@illinois.edu",
-    password: "Probably shouldn't be in plaintext",
-    pendingTasks: ['MyTask1', 'MyTask2'],
-    interestedTasks: ["Eat chicken", "Dont eat chicken", "Make a cheesecake"],
-    notifications: ["Hey guys", "This is a placeholder"],
-    dateCreated: new Date(),
-  }
-
-  //$cookies.put('userId', "")
+.controller('UserProfileCtrl', ['$scope', '$http', '$cookies', 'Users', function($scope, $http, $cookies, Users) {
 
   var userId = $cookies.get('userId');
-  console.log(userId);
-})
+
+  Users.getByUserId(userId).success(function(data){
+    var user = data.data;
+    console.log("success")
+    console.log(user);
+    $scope.user = user;
+
+    if(user.profilePicture === undefined || user.profilePicture === "")
+    {
+      document.getElementById('userImage').style.backgroundImage = "url('../img/defaultpfpic.png')";
+    }
+    else
+    {
+      document.getElementById('userImage').style.backgroundImage = "url('"+user.profilePicture+"')";
+    }
+
+  });
+
+  document.getElementById('uploadFile').addEventListener('change', uploadFile, false);
+
+  /*
+   $scope.user = { name: "Stefan Dao",
+   email: "sdao2@illinois.edu",
+   password: "Probably shouldn't be in plaintext",
+   pendingTasks: ['MyTask1', 'MyTask2'],
+   interestedTasks: ["Eat chicken", "Dont eat chicken", "Make a cheesecake"],
+   notifications: ["Hey guys", "This is a placeholder"],
+   dateCreated: new Date(),
+   profilePicture: { data: ""}
+   }
+   */
+
+
+  function uploadFile(input)
+  {
+    console.log("hello")
+    if (input.target.files && input.target.files[0] && input.target.files[0].type.match('image.*')) {
+      console.log(input.target.files[0]);
+
+      var file = input.target.files[0];
+
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = (function(theFile) {
+        return function(e) {
+          // Render thumbnail.
+
+
+          $scope.user.profilePicture =  e.target.result;
+          document.getElementById('userImage').style.backgroundImage = "url('"+e.target.result+"')";
+
+          Users.put(userId, $scope.user).success(function(data){
+            console.log("updated picture");
+            console.log($scope.user);
+          });
+        };
+      })(file);
+    }
+    else
+    {
+      console.log('uploading invalid file');
+    }
+  }
+}])
 
 .controller('SettingsController', ['$scope', '$window', function($scope, $window) {
   $scope.url = $window.sessionStorage.baseurl;

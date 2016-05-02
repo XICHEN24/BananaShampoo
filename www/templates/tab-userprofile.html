@@ -2,7 +2,7 @@
   <ion-content class="padding">
     <div class="row responsive-md">
       <div class="col col-20 userData text-center">
-        <div class="userImage">
+        <div class="userImage" id="userImage">
 
         </div>
         <div class="userInformation">
@@ -10,8 +10,9 @@
           <h3> Contact Email: {{ user.email }}</h3>
           <h7> User since {{user.dateCreated | date:'yyyy-MM-dd' }}</h7>
         </div>
-        <div class="button">
-          Change Picture
+
+        <div>
+          <input type = "file" id="uploadFile"/>
         </div>
         <div id="hidden-resizer" style="visibility: hidden"></div>
       </div>
@@ -24,6 +25,15 @@
             <div class="notifications" ng-repeat="notification in user.notifications">
               {{ notification }}
             </div>
+
+            <!--
+            <ion-list>
+              <ion-item ng-show="renttask==true" ng-repeat="task in rent | limitTo:rentlimit">
+                <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task._id}}">{{task.name}}</a></div>
+              </ion-item>
+            </ion-list>
+
+            -->
           </div>
         </div>
         <div>
