@@ -1,0 +1,27 @@
+<ion-view view-title="{{taskdetail.name}}">
+  <ion-content class="padding">
+    <ion-list>
+      <ion-item>
+        <div class="item"><span style="color:dodgerblue">Title:</span> &nbsp;&nbsp;{{taskdetail.name}}</div>
+      </ion-item>
+      <ion-item>
+        <div class="item"><span style="color:dodgerblue">Post By: </span>&nbsp;&nbsp;{{taskdetail.assignedUserName}}</div>
+      </ion-item>
+      <ion-item>
+        <div class="item"><span style="color:dodgerblue">Post Date:</span> &nbsp;&nbsp;{{taskdetail.dateCreated}}</div>
+      </ion-item>
+      <ion-item>
+        <div class="item"><i class="icon ion-person"></i>&nbsp;&nbsp;<span style="color:red">Contact:</span> &nbsp;&nbsp;{{userdetail.name}}</div>
+      </ion-item>
+      <ion-item>
+        <div class="item"><i class="icon ion-email"></i>&nbsp;&nbsp;<span style="color:red">Email:</span> &nbsp;&nbsp;{{userdetail.email}}</div>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-item ng-repeat="msg in message track by $index">
+        {{msg}}
+        <span style="color:dodgerblue">Message:</span> &nbsp;&nbsp;{{msg}}</div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

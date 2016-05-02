@@ -1,0 +1,33 @@
+<ion-view view-title="User Log In">
+    <ion-content class="padding">
+        <div style="background-color: white;">
+            <div style="width:400px;margin:0 auto;">
+                <img src="../img/social-sharing.jpg" style="width: 300px; height:250px;">
+                <div id="addUser-form" class="row">
+                    <form name="userSignInForm" novalidate>
+                        <div class="form-group">
+                            <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                            <h3 style="text-align: left; vertical-align: middle;">Email<span style="color:red;margin-right: 100px;">*</span></h3>
+                            <hr>
+                            <input type="email" class="form-control input-lg text-center" placeholder="Your Email" name="email" ng-model="formEmail.text" style="resize:horizontal; width:300px; text-align: center; vertical-align: middle;" required>
+                            <p ng-show="userSignInForm.email.$invalid && !userSignInForm.email.$pristine" class="help-block" style="color:white; background-color: red; font-size: 1.5em; width: 350px; display: inline;">Please enter a valid email.</p>
+                            <hr>
+                            <h3 style="text-align: left; vertical-align: middle;">Password<span style="color:red;margin-right: 100px;">*</span></h3>
+                            <hr>
+                            <input type="password" class="form-control input-lg text-center" placeholder="Password" name="password" ng-model="formPassword.text" style="resize:horizontal; width:300px;" required>
+                            <p ng-show="userSignInForm.password.$invalid && !userSignInForm.password.$pristine" class="help-block" style="color:white; background-color: #68ffc4; font-size: 1.5em; width: 350px; display: inline;">The Password is required.</p>
+                            <hr>
+                        </div>
+                        <!-- createUser() WILL CREATE NEW USERS -->
+                        <button id="submitButton" type="submit" class="button" ng-click="userSignIn()" ng-disabled="userSignInForm.$invalid">Log In</button>
+                        <p ng-bind-html="UserSignedIn" class="help-block" style="color:white; background-color:green; font-size: 1.5em; width: 350px;"></p>
+                        <p ng-bind-html="errorPopUp" class="help-block" style="color:white; background-color:red; font-size: 1.5em; width: 350px;"></p>
+                        <hr>
+                        <h3>Do not have an account yet?</h3>
+                        <a class="button" ng-href="#/tab/signUp" style="text-decoration-color: none;">Click Here to Sign Up!</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

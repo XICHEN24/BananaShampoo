@@ -2,6 +2,11 @@ angular.module('starter.controllers', ['ngCookies'])
 
   .controller('userSignIn', ['$scope', '$http', 'Users', '$window','$sce', '$cookies', function($scope, $http, Users, $window, $sce, $cookies){
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
     $scope.formEmail = {text:""}
     $scope.formPassword = {text:""}
 
@@ -10,7 +15,11 @@ angular.module('starter.controllers', ['ngCookies'])
      Users.get().success(function(data) {
         $scope.temp = data;
         $scope.user = $scope.temp.data;
+<<<<<<< HEAD
         console.log($scope.user);
+=======
+        //console.log($scope.user);
+>>>>>>> master
         var email = $scope.formEmail.text;
         var password = $scope.formPassword.text;
         var errorMessage = "";
@@ -37,15 +46,24 @@ angular.module('starter.controllers', ['ngCookies'])
            }
          }
          if (emailTrue && passwordTrue) {
+<<<<<<< HEAD
            $window.location.href = '/index.html#/tab/userprofile';
          }
 
 
+=======
+           $window.location.href = 'index.html#/tab/userprofile';
+         }
+>>>>>>> master
          if(!emailTrue)
            errorMessage = "The email you enter is not exists, please try again!";
          else
          if(!passwordTrue && emailTrue)
+<<<<<<< HEAD
            errorMessage = "The password you enter is not exists, please try again!";
+=======
+           errorMessage = "The password you enter is not true, please try again!";
+>>>>>>> master
 
          //console.log(errorMessage);
          $scope.errorPopUp = $sce.trustAsHtml(errorMessage);
@@ -86,7 +104,11 @@ angular.module('starter.controllers', ['ngCookies'])
           $scope.UserAdded = $sce.trustAsHtml('User "' + $scope.formName.text + '" has been add');
         }
       };
+<<<<<<< HEAD
       $window.location.href = '/index.html#/tab/userprofile';
+=======
+      $window.location.href = 'index.html#/tab/signIn';
+>>>>>>> master
 
     }).error(function(err){
         $scope.failMessage = "The Email you entered has been registered";
@@ -116,6 +138,7 @@ angular.module('starter.controllers', ['ngCookies'])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
+<<<<<<< HEAD
 .controller('CategoryCtrl', ['$scope', '$http', 'Users', '$window' , function($scope, $http, Users, $window) {
 
   $http.get('http://localhost:4000/api/tasks?where={"category": "Study"}').success(function(data){
@@ -436,6 +459,353 @@ angular.module('starter.controllers', ['ngCookies'])
   */
 
 
+=======
+.controller('CategoryCtrl', ['$scope', '$http', 'Users', '$window','$cookies', function($scope, $http, Users, $window,$cookies) {
+
+  var temp = $cookies.get('userId');
+  $cookies.put('userId',temp);
+  console.log(temp);
+
+  $http.get('http://localhost:4000/api/tasks?where={"category": "Study"}').success(function(data){
+    $scope.study = data.data;
+    //console.log(data);
+
+  }).error(function(err){
+    console.log(err);
+  });
+  $http.get('http://localhost:4000/api/tasks?where={"category": "Sports"}').success(function(data){
+    $scope.sport = data.data;
+    //console.log(data);
+
+  }).error(function(err){
+    console.log(err);
+  });
+  $http.get('http://localhost:4000/api/tasks?where={"category": "Food"}').success(function(data){
+    $scope.food = data.data;
+    console.log(data.data);
+
+  }).error(function(err){
+    console.log(err);
+  });
+  $http.get('http://localhost:4000/api/tasks?where={"category": "Daily"}').success(function(data){
+    $scope.daily = data.data;
+    //console.log(data);
+
+  }).error(function(err){
+    console.log(err);
+  });
+  $http.get('http://localhost:4000/api/tasks?where={"category": "Travel"}').success(function(data){
+    $scope.travel = data.data;
+    //console.log(data);
+
+  }).error(function(err){
+    console.log(err);
+  });
+  $http.get('http://localhost:4000/api/tasks?where={"category": "Rent"}').success(function(data){
+    $scope.rent = data.data;
+    //console.log(data);
+
+  }).error(function(err){
+    console.log(err);
+  });
+  $http.get('http://localhost:4000/api/tasks?where={"category": "Exchange"}').success(function(data){
+    $scope.exchange = data.data;
+    //console.log(data);
+
+  }).error(function(err){
+    console.log(err);
+  });
+
+  $scope.category = 'Category';
+
+  $scope.studytask = false;
+  $scope.studylimit = 5;
+
+  $scope.sporttask = false;
+  $scope.sportlimit = 5;
+
+  $scope.foodtask = false;
+  $scope.foodlimit = 5;
+
+  $scope.dailytask = false;
+  $scope.dailylimit = 5;
+
+  $scope.traveltask = false;
+  $scope.travellimit = 5;
+
+  $scope.renttask = false;
+  $scope.rentlimit = 5;
+
+  $scope.exchangetask = false;
+  $scope.exchangelimit = 5;
+  $scope.type = "test"
+
+  $scope.showStudy = function(){
+    $scope.category = 'Study';
+    $scope.studytask = true;
+    $scope.sporttask = false;
+    $scope.sportlimit = 5;
+
+    $scope.foodtask = false;
+    $scope.foodlimit = 5;
+
+    $scope.dailytask = false;
+    $scope.dailylimit = 5;
+
+    $scope.traveltask = false;
+    $scope.travellimit = 5;
+
+    $scope.renttask = false;
+    $scope.rentlimit = 5;
+
+    $scope.exchangetask = false;
+    $scope.exchangelimit = 5;
+  }
+  $scope.showSports = function(){
+    $scope.category = 'Sports';
+    $scope.sporttask = true;
+    $scope.studytask = false;
+    $scope.studylimit = 5;
+
+    $scope.foodtask = false;
+    $scope.foodlimit = 5;
+
+    $scope.dailytask = false;
+    $scope.dailylimit = 5;
+
+    $scope.traveltask = false;
+    $scope.travellimit = 5;
+
+    $scope.renttask = false;
+    $scope.rentlimit = 5;
+
+    $scope.exchangetask = false;
+    $scope.exchangelimit = 5;
+  }
+  $scope.showFood = function(){
+    $scope.category = 'Food';
+    $scope.foodtask = true;
+    $scope.sportlimit = 5;
+    $scope.sporttask = false;
+
+    $scope.studytask = false;
+    $scope.studylimit = 5;
+
+    $scope.dailytask = false;
+    $scope.dailylimit = 5;
+
+    $scope.traveltask = false;
+    $scope.travellimit = 5;
+
+    $scope.renttask = false;
+    $scope.rentlimit = 5;
+
+    $scope.exchangetask = false;
+    $scope.exchangelimit = 5;
+  }/*
+  $scope.showDaily = function(){
+    $scope.studytask = false;
+    $scope.studylimit = 5;
+
+    $scope.sporttask = false;
+    $scope.sportlimit = 5;
+
+    $scope.foodtask = false;
+    $scope.foodlimit = 5;
+
+    $scope.dailytask = true;
+    //$scope.dailylimit = 5;
+
+    $scope.traveltask = false;
+    $scope.travellimit = 5;
+
+    $scope.renttask = false;
+    $scope.rentlimit = 5;
+
+    $scope.exchangetask = false;
+    $scope.exchangelimit = 5;
+
+  } */
+  $scope.showTravel = function(){
+    $scope.category = 'Travel';
+    $scope.studytask = false;
+    $scope.studylimit = 5;
+
+    $scope.sporttask = false;
+    $scope.sportlimit = 5;
+
+    $scope.foodtask = false;
+    $scope.foodlimit = 5;
+
+    $scope.dailytask = false;
+    $scope.dailylimit = 5;
+
+    $scope.traveltask = true;
+    //$scope.travellimit = 5;
+
+    $scope.renttask = false;
+    $scope.rentlimit = 5;
+
+    $scope.exchangetask = false;
+    $scope.exchangelimit = 5;
+  }
+  $scope.showRent = function(){
+    $scope.category = 'Rent';
+    $scope.studytask = false;
+    $scope.studylimit = 5;
+
+    $scope.sporttask = false;
+    $scope.sportlimit = 5;
+
+    $scope.foodtask = false;
+    $scope.foodlimit = 5;
+
+    $scope.dailytask = false;
+    $scope.dailylimit = 5;
+
+    $scope.traveltask = false;
+    $scope.travellimit = 5;
+
+    $scope.renttask = true;
+    //$scope.rentlimit = 5;
+
+    $scope.exchangetask = false;
+    $scope.exchangelimit = 5;
+  }
+  $scope.showExchange = function(){
+    $scope.category = 'Exchange';
+    $scope.studytask = false;
+    $scope.studylimit = 5;
+
+    $scope.sporttask = false;
+    $scope.sportlimit = 5;
+
+    $scope.foodtask = false;
+    $scope.foodlimit = 5;
+
+    $scope.dailytask = false;
+    $scope.dailylimit = 5;
+
+    $scope.traveltask = false;
+    $scope.travellimit = 5;
+
+    $scope.renttask = false;
+    $scope.rentlimit = 5;
+
+    $scope.exchangetask = true;
+    //$scope.exchangelimit = 5;
+  }
+
+  $scope.setStudyLimit = function(num){
+    $scope.studylimit= $scope.study.length;
+  }
+  $scope.setSportLimit = function(num){
+    $scope.sportlimit= $scope.sport.length;
+  }
+  $scope.setFoodLimit = function(num){
+    $scope.foodlimit= $scope.food.length;
+  }/*
+  $scope.setDailyLimit = function(num){
+    $scope.dailylimit= $scope.daily.length;
+  }*/
+  $scope.setTravelLimit = function(num){
+    $scope.travellimit= $scope.travel.length;
+  }
+  $scope.setRentLimit = function(num){
+    $scope.rentlimit= $scope.rent.length;
+  }
+  $scope.setExchangeLimit = function(num){
+    $scope.exchangelimit= $scope.exchange.length;
+  }
+
+}])
+
+.controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
+  $http.get('http://localhost:4000/api/tasks/'+$stateParams._id).success(function(data){
+    $scope.taskdetail = data.data;
+    $scope.message = $scope.taskdetail.messages;
+    //console.log(data);
+    $http.get('http://localhost:4000/api/users/'+$scope.taskdetail.assignedUser).success(function(data){
+      $scope.userdetail = data.data;
+      console.log(data);
+    }).error(function(err){
+      console.log(err);
+    });
+
+  }).error(function(err){
+    console.log(err);
+  });
+}])
+
+.controller('PostCtrl',['$scope', '$cookies', 'Tasks', 'Users', function($scope, $cookies, Tasks, Users) {
+
+  $scope.name = {text:""};
+  $scope.category = {text:"study"};
+  $scope.description = {text:""};
+  $scope.assignedUser = $cookies.get('userId');
+  $scope.completed = false;
+
+  $scope.submitPost = function () {
+
+    var user = Users.getByUserId($scope.assignedUser).success(function (user) {
+
+      var post = {
+        name: $scope.name.text,
+        category: $scope.category.text,
+        description: $scope.description.text,
+        assignedUser: $scope.assignedUser,
+        assignedUserName: user.data.name,
+        completed: false
+    };
+      console.log(post);
+      Tasks.post(post).success(function (data) {
+        window.location.href = 'index.html#/tab/category';
+      }).error(function (e) {
+        alert(e)
+      });
+    }).error(function (e) {
+      alert(e)
+    });
+  }
+}])
+
+.controller('UserProfileCtrl', ['$scope', '$http', '$cookies', 'Users', function($scope, $http, $cookies, Users) {
+
+  var userId = $cookies.get('userId');
+
+  Users.getByUserId(userId).success(function(data){
+    var user = data.data;
+    console.log("success")
+    console.log(user);
+    $scope.user = user;
+
+    if(user.profilePicture === undefined || user.profilePicture === "")
+    {
+      document.getElementById('userImage').style.backgroundImage = "url('../img/defaultpfpic.png')";
+    }
+    else
+    {
+      document.getElementById('userImage').style.backgroundImage = "url('"+user.profilePicture+"')";
+    }
+
+  });
+
+  document.getElementById('uploadFile').addEventListener('change', uploadFile, false);
+
+  /*
+   $scope.user = { name: "Stefan Dao",
+   email: "sdao2@illinois.edu",
+   password: "Probably shouldn't be in plaintext",
+   pendingTasks: ['MyTask1', 'MyTask2'],
+   interestedTasks: ["Eat chicken", "Dont eat chicken", "Make a cheesecake"],
+   notifications: ["Hey guys", "This is a placeholder"],
+   dateCreated: new Date(),
+   profilePicture: { data: ""}
+   }
+   */
+
+
+>>>>>>> master
   function uploadFile(input)
   {
     console.log("hello")
