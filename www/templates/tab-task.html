@@ -3,14 +3,14 @@
     <div style="margin-top: 45px">
     <form ng-submit="submitPost()">
       <ion-item>
-        <input ng-model="name" placeholder="Title" style="width: 50%; margin-left: 25%; font-size: x-large">
+        <input ng-model="name.text" placeholder="Title" style="width: 50%; margin-left: 25%; font-size: x-large;">
       </ion-item>
       <ion-item>
       <div style="float: right">
         <label>
           Category:
         </label>
-        <select ng-model="category" style="font-size: large">
+        <select ng-model="category.text" style="font-size: large;">
           <option value = "Study">Study</option>
           <option value = "Sports">Sports</option>
           <option value = "Food">Food</option>
@@ -21,7 +21,8 @@
       </div>
       </ion-item>
       <ion-item>
-        <textarea ng-model="content" placeholder="Post your content here ..." style="width: 80%; margin-left: 10%; min-height: 300px; font-size: large"></textarea>
+        <textarea ng-model="description.text" placeholder="Post your content here ..." style="width: 80%; margin-left: 10%; min-height: 200px; font-size: large;">
+        </textarea>
       </ion-item>
       <button type="submit" class="button button-block" style="font-size: large; border-radius: 5px; width: 20%; margin-left: 40%">Send</button>
     </ion-item>

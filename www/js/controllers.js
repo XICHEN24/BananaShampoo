@@ -393,25 +393,27 @@ angular.module('starter.controllers', ['ngCookies'])
   });
 }])
 
-.controller('PostCtrl', function($scope, $cookie, Tasks, Users) {
+.controller('PostCtrl',['$scope', '$cookies', 'Tasks', 'Users', function($scope, $cookies, Tasks, Users) {
 
-  $scope.name = '';
-  $scope.category = 'Study';
-  $scope.description = '';
-  $scope.assignedUser = $cookie.get('userId');
+  $scope.name = {text:""};
+  $scope.category = {text:"study"};
+  $scope.description = {text:""};
+  $scope.assignedUser = $cookies.get('userId');
   $scope.completed = false;
 
   $scope.submitPost = function () {
-    var user = Users.get($scope.assignedUser).success(function (user) {
+
+    var user = Users.getByUserId($scope.assignedUser).success(function (user) {
+
       var post = {
-        name: $scope.name,
-        category: $scope.category,
-        description: $scope.description,
+        name: $scope.name.text,
+        category: $scope.category.text,
+        description: $scope.description.text,
         assignedUser: $scope.assignedUser,
-        assignedUserName: user.name,
+        assignedUserName: user.data.name,
         completed: false
     };
-
+      console.log(post);
       Tasks.post(post).success(function (data) {
         window.location.href = 'index.html#/tab/category';
       }).error(function (e) {
@@ -421,7 +423,7 @@ angular.module('starter.controllers', ['ngCookies'])
       alert(e)
     });
   }
-})
+}])
 
 .controller('UserProfileCtrl', function($scope, $cookies) {
 
@@ -446,7 +448,7 @@ angular.module('starter.controllers', ['ngCookies'])
     dateCreated: new Date(),
   }
 
-  $cookies.put('userId', "HELLO")
+  //$cookies.put('userId', "")
 
   var userId = $cookies.get('userId');
   console.log(userId);
