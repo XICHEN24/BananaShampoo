@@ -381,21 +381,32 @@ angular.module('starter.controllers', ['ngCookies'])
   });
 }])
 
-.controller('PostCtrl', function($scope) {
-  $scope.post = {
-    name: '',
-    category: 'Life',
-    description: '',
-    assignedUser: '',
-    assignedUserName: 'unassigned',
-    completed: false
-  };
+.controller('PostCtrl', function($scope, $cookie, Tasks, Users) {
+
+  $scope.name = '';
+  $scope.category = 'Study';
+  $scope.description = '';
+  $scope.assignedUser = $cookie.get('userId');
+  $scope.completed = false;
 
   $scope.submitPost = function () {
-    Post.create($scope.post).success(function (data) {
-      window.location.replace("#/tab/dash");
+    var user = Users.get($scope.assignedUser).success(function (user) {
+      var post = {
+        name: $scope.name,
+        category: $scope.category,
+        description: $scope.description,
+        assignedUser: $scope.assignedUser,
+        assignedUserName: user.name,
+        completed: false
+    };
+
+      Tasks.post(post).success(function (data) {
+        window.location.replace("#/tab/dash");
+      }).error(function (e) {
+        alert(e)
+      });
     }).error(function (e) {
-      alert(e.message)
+      alert(e)
     });
   }
 })
