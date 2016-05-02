@@ -1,8 +1,14 @@
 <ion-view view-title="User Sign Up">
     <ion-content class="padding">
-        <div style="background-color: white;">
-            <div style="width:400px;margin:0 auto;">
-                <img src="../img/sharing.jpg" style="width: 300px; height:250px;">
+        <div id="clouds">
+            <div class="cloud x1"></div>
+            <!-- Time for multiple clouds to dance around -->
+            <div class="cloud x2"></div>
+            <div class="cloud x3"></div>
+            <div class="cloud x4"></div>
+            <div class="cloud x5"></div>
+            <div style="width:400px;margin:0 auto; margin-top: -300px;">
+                <img src="../img/sharing.jpg" style="width: 90%; height:250px; margin-top: -100px;">
                 <div id="addUser-form" class="row">
                     <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
                         <div class="form-group">
