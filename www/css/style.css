@@ -1,12 +1,23 @@
-/* Empty. Add your own CSS if you like */
+.item{
+  color:black;
+}
 
+.title{
+  padding:0px;
+  margin:0px;
+  font-size:10pt;
+  font-weight:bold;
+}
+
+.inner {
+  margin: 0 auto;
+}
 
 .userInformation {
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
-
 
 .userImage {
   margin-left: auto;
@@ -24,4 +35,18 @@
 .placeholder {
   background-color: red;
   border-width: 1px;
+}
+
+/* Empty. Add your own CSS if you like */
+.formData {
+  color:blue;
+  text-align: center;
+  float:left;
+}
+
+#submitButton {
+  color: white;
+  background-color: green;
+  font-size: 1.5rem;
+  text-align: left;
 }
