@@ -12,7 +12,7 @@ angular.module('starter.controllers', ['ngCookies'])
      Users.get().success(function(data) {
         $scope.temp = data;
         $scope.user = $scope.temp.data;
-        console.log($scope.user);
+        //console.log($scope.user);
         var email = $scope.formEmail.text;
         var password = $scope.formPassword.text;
         var errorMessage = "";
@@ -39,15 +39,13 @@ angular.module('starter.controllers', ['ngCookies'])
            }
          }
          if (emailTrue && passwordTrue) {
-           $window.location.href = '/index.html#/tab/userprofile';
+           $window.location.href = 'index.html#/tab/userprofile';
          }
-
-
          if(!emailTrue)
            errorMessage = "The email you enter is not exists, please try again!";
          else
          if(!passwordTrue && emailTrue)
-           errorMessage = "The password you enter is not exists, please try again!";
+           errorMessage = "The password you enter is not true, please try again!";
 
          //console.log(errorMessage);
          $scope.errorPopUp = $sce.trustAsHtml(errorMessage);
@@ -88,7 +86,7 @@ angular.module('starter.controllers', ['ngCookies'])
           $scope.UserAdded = $sce.trustAsHtml('User "' + $scope.formName.text + '" has been add');
         }
       };
-      $window.location.href = '/index.html#/tab/userprofile';
+      $window.location.href = 'index.html#/tab/signIn';
 
     }).error(function(err){
         $scope.failMessage = "The Email you entered has been registered";
