@@ -401,7 +401,7 @@ angular.module('starter.controllers', ['ngCookies'])
     };
 
       Tasks.post(post).success(function (data) {
-        window.location.replace("#/tab/dash");
+        window.location.href = 'index.html#/tab/category';
       }).error(function (e) {
         alert(e)
       });
