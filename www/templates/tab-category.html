@@ -1,16 +1,17 @@
-<ion-view view-title="Category" ng-controller='CategoryCtrl'>
+<ion-view view-title={{category}} ng-controller='CategoryCtrl'>
   <ion-pane>
     <ion-content>
 
       <div class="button-bar">
-        <a class="button button-positive" ng-click=showStudy()><div class="title"><i class="icon ion-ios-book"></i></div><div class="title">Study</div></a>
-        <a class="button button-assertive" ng-click=showSports()><i class="icon ion-ios-basketball"></i><div class="title">Sports</div></a>
-        <a class="button button-energized" ng-click=showFood()><i class="icon ion-ios-nutrition"></i><div class="title">Food</div></a>
-        <a class="button button-calm" ng-click=showDaily()><i class="icon ion-ios-cart"></i><div class="title">Daily</div></a>
-        <a class="button button-royal" ng-click=showTravel()><i class="icon ion-android-car"></i><div class="title">Travel</div></a>
-        <a class="button button-balanced" ng-click=showRent()><i class="ion-social-usd"></i><div class="title">Rent</div></a>
-        <a class="button button-assertive" ng-click=showExchange()><i class="icon ion-chatbubbles"></i><div class="title">Exchange</div></a>
+        <a class="button button-balanced" ng-click=showStudy()><i class="icon ion-ios-book"></i><div class="title">&nbsp;Study</div></a>
+        <a class="button button-energized" ng-click=showSports()><i class="icon ion-ios-basketball"></i><div class="title">&nbsp;Sports</div></a>
+        <a class="button button-calm" ng-click=showFood()><i class="icon ion-ios-nutrition"></i><div class="title">&nbsp;Food</div></a>
+       <!-- <a class="button button-calm" ng-click=showDaily()><i class="icon ion-ios-cart"></i><span class="title">Daily</span></a>-->
 
+        <a class="button button-balanced" ng-click=showTravel()><i class="icon ion-android-car"></i><div class="title">&nbsp;Travel</div></a>
+        <a class="button button-energized" ng-click=showRent()><i class="icon ion-bag"></i><div class="title">&nbsp;Rent</div></a>
+        <a class="button button-calm" ng-click=showExchange()><i class="icon ion-chatbubbles"></i><div class="title">&nbsp;Exchange</div></a>
+       <!-- <a class="button button-energized" ng-click=showExchange()><i class="icon ion-chatbubbles"></i><div class="title">Other</div></a>-->
       </div>
       <div class="list">
         <div class = "inner">
@@ -33,14 +34,14 @@
           </ion-item>
           <button class="button button-energized button-small" ng-show="foodtask==true&&foodlimit==5" ng-click=setFoodLimit(0)>Show More</button>
         </ion-list>
-
+<!--
         <ion-list>
           <ion-item ng-show="dailytask==true" ng-repeat="task in daily | limitTo:dailylimit">
             <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task._id}}">{{task.name}}</a></div>
           </ion-item>
           <button class="button button-energized button-small" ng-show="dailytask==true&&dailylimit==5" ng-click=setDailyLimit(0)>Show More</button>
         </ion-list>
-
+-->
         <ion-list>
           <ion-item ng-show="traveltask==true" ng-repeat="task in travel | limitTo:travellimit">
             <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task._id}}">{{task.name}}</a></div>
@@ -54,7 +55,6 @@
           </ion-item>
           <button class="button button-energized button-small" ng-show="renttask==true&&rentlimit==5" ng-click=setRentLimit(0)>Show More</button>
         </ion-list>
-
         <ion-list>
           <ion-item ng-show="exchangetask==true" ng-repeat="task in exchange | limitTo:exchangelimit">
             <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task._id}}">{{task.name}}</a></div>

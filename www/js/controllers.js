@@ -168,6 +168,8 @@ angular.module('starter.controllers', ['ngCookies'])
     console.log(err);
   });
 
+  $scope.category = 'Category';
+
   $scope.studytask = false;
   $scope.studylimit = 5;
 
@@ -191,6 +193,7 @@ angular.module('starter.controllers', ['ngCookies'])
   $scope.type = "test"
 
   $scope.showStudy = function(){
+    $scope.category = 'Study';
     $scope.studytask = true;
     $scope.sporttask = false;
     $scope.sportlimit = 5;
@@ -211,6 +214,7 @@ angular.module('starter.controllers', ['ngCookies'])
     $scope.exchangelimit = 5;
   }
   $scope.showSports = function(){
+    $scope.category = 'Sports';
     $scope.sporttask = true;
     $scope.studytask = false;
     $scope.studylimit = 5;
@@ -231,6 +235,7 @@ angular.module('starter.controllers', ['ngCookies'])
     $scope.exchangelimit = 5;
   }
   $scope.showFood = function(){
+    $scope.category = 'Food';
     $scope.foodtask = true;
     $scope.sportlimit = 5;
     $scope.sporttask = false;
@@ -249,7 +254,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
     $scope.exchangetask = false;
     $scope.exchangelimit = 5;
-  }
+  }/*
   $scope.showDaily = function(){
     $scope.studytask = false;
     $scope.studylimit = 5;
@@ -272,8 +277,9 @@ angular.module('starter.controllers', ['ngCookies'])
     $scope.exchangetask = false;
     $scope.exchangelimit = 5;
 
-  }
+  } */
   $scope.showTravel = function(){
+    $scope.category = 'Travel';
     $scope.studytask = false;
     $scope.studylimit = 5;
 
@@ -296,6 +302,7 @@ angular.module('starter.controllers', ['ngCookies'])
     $scope.exchangelimit = 5;
   }
   $scope.showRent = function(){
+    $scope.category = 'Rent';
     $scope.studytask = false;
     $scope.studylimit = 5;
 
@@ -318,6 +325,7 @@ angular.module('starter.controllers', ['ngCookies'])
     $scope.exchangelimit = 5;
   }
   $scope.showExchange = function(){
+    $scope.category = 'Exchange';
     $scope.studytask = false;
     $scope.studylimit = 5;
 
@@ -348,10 +356,10 @@ angular.module('starter.controllers', ['ngCookies'])
   }
   $scope.setFoodLimit = function(num){
     $scope.foodlimit= $scope.food.length;
-  }
+  }/*
   $scope.setDailyLimit = function(num){
     $scope.dailylimit= $scope.daily.length;
-  }
+  }*/
   $scope.setTravelLimit = function(num){
     $scope.travellimit= $scope.travel.length;
   }
