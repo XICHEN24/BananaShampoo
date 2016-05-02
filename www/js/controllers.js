@@ -2,6 +2,8 @@ angular.module('starter.controllers', ['ngCookies'])
 
   .controller('userSignIn', ['$scope', '$http', 'Users', '$window','$sce', '$cookies', function($scope, $http, Users, $window, $sce, $cookies){
 
+
+
     $scope.formEmail = {text:""}
     $scope.formPassword = {text:""}
 
@@ -116,7 +118,11 @@ angular.module('starter.controllers', ['ngCookies'])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
-.controller('CategoryCtrl', ['$scope', '$http', 'Users', '$window' , function($scope, $http, Users, $window) {
+.controller('CategoryCtrl', ['$scope', '$http', 'Users', '$window','$cookies', function($scope, $http, Users, $window,$cookies) {
+
+  var temp = $cookies.get('userId');
+  $cookies.put('userId',temp);
+  console.log(temp);
 
   $http.get('http://localhost:4000/api/tasks?where={"category": "Study"}').success(function(data){
     $scope.study = data.data;
