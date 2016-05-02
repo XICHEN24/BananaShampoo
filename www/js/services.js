@@ -3,7 +3,7 @@ var starterServices = angular.module('starter.services', [])
 .factory('Post', function($http) {
   return {
     create: function(data) {
-      return $http.post('localhost:4000/tasks', data);
+      return $http.post('localhost:4000/api/tasks', data);
     }
   }
 })
