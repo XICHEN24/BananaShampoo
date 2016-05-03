@@ -3,7 +3,6 @@ angular.module('starter.controllers', ['ngCookies'])
   .controller('userSignIn', ['$scope', '$http', 'Users', '$window','$sce', '$cookies', function($scope, $http, Users, $window, $sce, $cookies){
 
 
-
     $scope.formEmail = {text:""}
     $scope.formPassword = {text:""}
 
@@ -403,19 +402,30 @@ angular.module('starter.controllers', ['ngCookies'])
 
   $scope.submitPost = function () {
 
-    var user = Users.getByUserId($scope.assignedUser).success(function (user) {
+    Users.getByUserId($scope.assignedUser).success(function (userdata) {
+
+      var user = userdata.data;
 
       var post = {
         name: $scope.name.text,
         category: $scope.category.text,
         description: $scope.description.text,
         assignedUser: $scope.assignedUser,
-        assignedUserName: user.data.name,
+        assignedUserName: user.name,
         completed: false
-    };
+      };
       console.log(post);
       Tasks.post(post).success(function (data) {
         window.location.href = 'index.html#/tab/category';
+        var task = data.data;
+        user.pendingTasks.push(task._id);
+        Users.put(user._id, user).success(function(data){
+          console.log("Updated user");
+          console.log(user);
+        }).error(function(e) {
+          alert(e);
+        });
+
       }).error(function (e) {
         alert(e)
       });
@@ -463,7 +473,6 @@ angular.module('starter.controllers', ['ngCookies'])
 
   function uploadFile(input)
   {
-    console.log("hello")
     if (input.target.files && input.target.files[0] && input.target.files[0].type.match('image.*')) {
       console.log(input.target.files[0]);
 

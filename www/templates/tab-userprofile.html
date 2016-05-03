@@ -22,35 +22,31 @@
             Notifications
           </h1>
           <div>
-            <div class="notifications" ng-repeat="notification in user.notifications">
-              {{ notification }}
-            </div>
-
-            <!--
             <ion-list>
-              <ion-item ng-show="renttask==true" ng-repeat="task in rent | limitTo:rentlimit">
-                <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task._id}}">{{task.name}}</a></div>
+              <ion-item ng-repeat="notification in user.notifications">
+                <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{notification.taskId}}">{{notification.text}}</a></div>
               </ion-item>
             </ion-list>
-
-            -->
           </div>
         </div>
         <div>
           <h1>
             My Listings
           </h1>
-          <div class="myTasks" ng-repeat="task in user.pendingTasks">
-            {{ task }}
-          </div>
-        </div>
+          <ion-list>
+            <ion-item ng-repeat="task in user.pendingTasks">
+              <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task}}">{{task}}</a></div>
+            </ion-item>
+          </ion-list>
         <div>
           <h1>
             Interested Listings
           </h1>
-          <div class="interestedTasks" ng-repeat="task in user.interestedTasks">
-            {{ task }}
-          </div>
+          <ion-list>
+            <ion-item ng-repeat="task in user.interestedTasks">
+              <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task}}">{{task}}</a></div>
+            </ion-item>
+          </ion-list>
         </div>
       </div>
     </div>
