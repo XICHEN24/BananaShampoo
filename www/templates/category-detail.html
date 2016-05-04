@@ -3,8 +3,8 @@
     <ion-list>
       <ion-item>
         <div class="item"><span style="color:dodgerblue">Title:</span> &nbsp;&nbsp;{{taskdetail.name}}
-        <button class="button button-energized button-middle" ng-click="setMyFavorite()" style="float:right;" ng-style="myStyle">Favorite</button></div>
-        <p ng-bind-html="favorite" class="help-block" style="color:white; background-color:green; font-size: 1.5em; width: 600px; text-align: center;"></p>
+        <button class="button button-energized button-middle" ng-click="setMyFavorite()" style="float:right; background-color: {{myStyle}};" >Favorite</button></div>
+        <p ng-bind-html="favorite" class="help-block" style="color:white; background-color:grey; font-size: 1.5em; width: 600px; text-align: center;"></p>
       </ion-item>
       <ion-item>
         <div class="item"><span style="color:dodgerblue">Post By: </span>&nbsp;&nbsp;{{taskdetail.assignedUserName}}</div>

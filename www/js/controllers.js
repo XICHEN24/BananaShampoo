@@ -2,7 +2,6 @@ angular.module('starter.controllers', ['ngCookies'])
 
 .controller('userSignIn', ['$scope', '$http', 'Users', '$window', '$sce', '$cookies', function($scope, $http, Users, $window, $sce, $cookies) {
 
-
         $scope.formEmail = { text: "" }
         $scope.formPassword = { text: "" }
 
@@ -325,7 +324,7 @@ angular.module('starter.controllers', ['ngCookies'])
 }])
 
 
-.controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http','$cookies','Tasks','Users','$sce', function($scope, $stateParams, $http, $cookies, Tasks,Users,$sce) {
+.controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http','$cookies','Tasks','Users','$sce','$timeout', function($scope, $stateParams, $http, $cookies, Tasks,Users,$sce, $timeout) {
   var temp = $cookies.get('userId');
   $cookies.put('userId',temp);
   //console.log(temp);
@@ -416,13 +415,14 @@ angular.module('starter.controllers', ['ngCookies'])
 
   clickSetMyFavorite = false;
   $scope.favorite = "";
+  $scope.myStyle = "grey";
 
   $scope.setMyFavorite = function() {
 
     if (!clickSetMyFavorite) {
       clickSetMyFavorite = true;
       $scope.favorite = $sce.trustAsHtml("This post has been added to your favorite list!");
-      myStyle = "{'background-color':'yellow'}"
+      $scope.myStyle = "#66ffff";
 
       Users.getByUserId($cookies.get('userId')).success(function(user) {
         var userData = user.data; // This is the whole user object
@@ -467,8 +467,9 @@ angular.module('starter.controllers', ['ngCookies'])
     } else {
       clickSetMyFavorite = false;
       $scope.favorite = $sce.trustAsHtml("This post has been took off from your favorite list!");
-      myStyle = { 'background-color': 'grey' }
+      $scope.myStyle = "grey";
     }
+    $scope.promise = $timeout(function() { $scope.favorite =  $sce.trustAsHtml("");}, 3000);
   }
 
   $http.get('http://localhost:4000/api/tasks/' + $stateParams._id).success(function(data) {
@@ -521,7 +522,7 @@ angular.module('starter.controllers', ['ngCookies'])
                     assignedUserName: user.data.name,
                     completed: false
                 };
-                console.log(post);
+                //console.log(post);
                 Tasks.post(post).success(function(data) {
                     window.location.href = 'index.html#/tab/category';
                 }).error(function(e) {
