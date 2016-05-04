@@ -2,6 +2,7 @@
   <ion-content>
     <div style="margin-top: 45px">
     <form ng-submit="submitPost()">
+      <p ng-bind-html="errorPopUp" class="help-block" style="color:white; background-color:red; font-size: 1.5em; width: 350px; text-align: center;"></p>
       <ion-item>
         <input ng-model="name.text" placeholder="Title" style="width: 50%; margin-left: 25%; font-size: x-large;">
       </ion-item>
