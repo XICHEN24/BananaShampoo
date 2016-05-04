@@ -353,7 +353,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
 }])
 
-.controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http','$cookies', function($scope, $stateParams, $http, $cookies) {
+.controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http','$cookies','Tasks','Users', function($scope, $stateParams, $http, $cookies, Tasks,Users) {
   var temp = $cookies.get('userId');
   $cookies.put('userId',temp);
   //console.log(temp);
@@ -364,43 +364,78 @@ angular.module('starter.controllers', ['ngCookies'])
       $http.get('http://localhost:4000/api/tasks/'+$stateParams._id).success(function(data) {
         $scope.taskdetail = data.data;
         $scope.message = $scope.taskdetail.messages;
-        console.log(data.data);
+        //console.log(data.data);
         var array = $scope.message;
-        array.push($scope.addmsg.text);
-        var userarray = $scope.taskdetail.interestedUsers;
-        userarray.push($cookies.get('userId'));
-        //console.log(array);
-        var newtask = {
-          "interestedUsers": userarray,
-          "messages": array
-        }
-        console.log(newtask);
-        $http.put('http://localhost:4000/api/tasks/'+$stateParams._id,newtask).success(function(data){
-          console.log(data.data);
-        }).error(function(err){
-          console.log(err);
-        })
-/*
-        var temp2 = $cookies.get('userId');
-        $http.get('http://localhost:4000/api/users/'+temp2).success(function(data) {
-          $scope.interest = data.data.interestedTasks;
-          var interestarray = data.data.interestedTasks;
-          interestarray.push($stateParams._id);
+        $http.get('http://localhost:4000/api/users/'+temp).success(function(data) {
+          $scope.logname = data.data.name;
+          $scope.logemail = data.data.email;
 
-          var newuser = {
-            "interestedTasks": interestarray
+
+          var ele = {
+            "msg": $scope.addmsg.text,
+            "ids": $cookies.get('userId'),
+            "name": $scope.logname,
+            "email": $scope.logemail
+          };
+
+          array.push(ele);
+          var userarray = $scope.taskdetail.interestedUsers;
+          var temp = 0;
+          for(var i=0;i<userarray.length;i++){
+            if(userarray[i]==$cookies.get('userId')){
+              temp = 1;
+            }
           }
-          console.log("interestedTaks:")
-          console.log(newuser);
-          $http.put('http://localhost:4000/api/users/'+temp2,newuser).success(function(data) {
-            console.log(data.data);
-          }).error(function(err){
+          if(temp==0){
+            userarray.push($cookies.get('userId'));
+          }
+          var newtask = {
+            "interestedUsers": userarray,
+            "messages": array,
+          }
+          $scope.taskdetail.messages = array;
+          $scope.taskdetail.interestedUsers = userarray;
+
+
+          Tasks.put($stateParams._id, $scope.taskdetail).success(function (task) {
+
+            $http.get('http://localhost:4000/api/users/'+task.data.assignedUser).success(function(userPost) {
+              var userData = userPost.data;
+              userData.notifications.push({
+                'taskId': task.data._id,
+                'notificationText': "User " + $scope.logname + " is now following your post '" + task.data.name + "'!"
+              });
+
+              Users.put(userData._id, userData).success(function(data) {
+                console.log("Updated notifications of the post user");
+                console.log(data.data)
+              });
+            }).error(function(e) {
+              console.log("error when updating postUser notifications!")
+            });
+
+
+            $http.get('http://localhost:4000/api/users/'+$cookies.get('userId')).success(function(userPost) {
+              var userData = userPost.data;
+              userData.notifications.push({
+                'taskId': task.data._id,
+                'notificationText': "you are now following the post "+ task.data.name +" of "+ task.data.assignedUserName +  "'!"
+              });
+
+              Users.put(userData._id, userData).success(function(data) {
+                console.log("Updated notifications of the post user");
+                console.log(data.data);
+              });
+            }).error(function(e) {
+              console.log("error when updating postUser notifications!")
+            });
+
+
+          }).error(function (err) {
             console.log(err);
           })
-        }).error(function(err){
-          console.log(err);
         })
-*/
+
       }).error(function(err){
         console.log(err);
       });
