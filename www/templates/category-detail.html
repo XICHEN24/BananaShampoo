@@ -1,35 +1,41 @@
 <ion-view view-title="{{taskdetail.name}}">
   <ion-content class="padding">
-    <ion-list>
+    <ion-list class="postinfo">
       <ion-item>
-        <div class="item"><span style="color:dodgerblue">Title:</span> &nbsp;&nbsp;{{taskdetail.name}}
+        <div class="item"><span style="color:dodgerblue"><strong>Title:</strong></span> &nbsp;&nbsp;{{taskdetail.name}}
         <button class="button button-energized button-middle" ng-click="setMyFavorite()" style="float:right;" ng-style="myStyle">Favorite</button></div>
         <p ng-bind-html="favorite" class="help-block" style="color:white; background-color:green; font-size: 1.5em; width: 600px; text-align: center;"></p>
       </ion-item>
       <ion-item>
-        <div class="item"><span style="color:dodgerblue">Post By: </span>&nbsp;&nbsp;{{taskdetail.assignedUserName}}</div>
+        <div class="item"><span style="color:dodgerblue"><strong>Post By:</strong> </span>&nbsp;&nbsp;{{taskdetail.assignedUserName}}</div>
       </ion-item>
       <ion-item>
-        <div class="item"><span style="color:dodgerblue">Post Date:</span> &nbsp;&nbsp;{{taskdetail.dateCreated}}</div>
+        <div class="item"><span style="color:dodgerblue"><strong>Post Date:</strong></span> &nbsp;&nbsp;{{taskdetail.dateCreated}}</div>
       </ion-item>
       <ion-item>
-        <div class="item"><i class="icon ion-person"></i>&nbsp;&nbsp;<span style="color:red">Contact:</span> &nbsp;&nbsp;{{userdetail.name}}</div>
+        <div class="item"><i class="icon ion-person"></i>&nbsp;&nbsp;<span style="color:red"><strong>Contact:</strong></span> &nbsp;&nbsp;{{userdetail.name}}</div>
       </ion-item>
       <ion-item>
-        <div class="item"><i class="icon ion-email"></i>&nbsp;&nbsp;<span style="color:red">Email:</span> &nbsp;&nbsp;<a ng-href="mailto:{{userdetail.email}}">{{userdetail.email}}</a></div>
+        <div class="item"><i class="icon ion-email"></i>&nbsp;&nbsp;<span style="color:red"><strong>Email:</strong></span> &nbsp;&nbsp;<a ng-href="mailto:{{userdetail.email}}">{{userdetail.email}}</a></div>
       </ion-item>
     </ion-list>
     <ion-list>
+      <ion-item ng-repeat="msg in message track by $index">
+        <div class="postmsg">
+          <img src="../img/user.png">
+        </div>
+        <div class = "postmsg">
+          <div class="msg"><span style="color:dodgerblue;fontWeight:normal" ><strong>Message:</strong></span>&nbsp;{{msg.msg}}</div>
+          <div class="msg"><span style="color:dodgerblue;fontWeight:bold"><strong>Post by:&nbsp;&nbsp;&nbsp;</strong></span>{{msg.name}}&nbsp;&nbsp;</div>
+          <div class="msg"><span style="color:dodgerblue;fontWeight:bold"><strong>Contact:&nbsp;&nbsp;&nbsp;</strong></span><a ng-href="mailto:{{msg.email}}">{{msg.email}}</a></div>
+        </div>
+      </ion-item>
+      <br>
       <ion-item>
         <textarea ng-model="addmsg.text" placeholder="Post your message here ..." style="width: 80%; margin-left: 10%; min-height: 200px; font-size: large;">
         </textarea>
       </ion-item>
       <button class="button button-energized button-small"  ng-click=addMessage()>Add Message</button>
-
-
-      <ion-item ng-repeat="msg in message track by $index">
-        <span style="color:dodgerblue">Message:</span> &nbsp;&nbsp;{{msg.msg}}&nbsp;&nbsp; Name:{{msg.name}}&nbsp;&nbsp; Email:{{msg.email}}</div>
-      </ion-item>
     </ion-list>
   </ion-content>
 </ion-view>

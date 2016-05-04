@@ -134,7 +134,7 @@ angular.module('starter.controllers', ['ngCookies'])
     }).error(function(err) {
         console.log(err);
     });
-    $http.get('http://localhost:4000/api/tasks?where={"category": "Exchange"}').success(function(data) {
+    $http.get('http://localhost:4000/api/tasks?where={"category": "Trade"}').success(function(data) {
         $scope.exchange = data.data;
         //console.log(data);
 
@@ -144,7 +144,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
     $scope.category = 'Category';
 
-    $scope.studytask = false;
+    $scope.studytask = true;
     $scope.studylimit = 5;
 
     $scope.sporttask = false;
@@ -276,7 +276,7 @@ angular.module('starter.controllers', ['ngCookies'])
         $scope.exchangelimit = 5;
     }
     $scope.showExchange = function() {
-        $scope.category = 'Exchange';
+        $scope.category = 'Trade';
         $scope.studytask = false;
         $scope.studylimit = 5;
 
