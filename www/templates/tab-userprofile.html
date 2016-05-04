@@ -24,7 +24,15 @@
           <div>
             <ion-list>
               <ion-item ng-repeat="notification in user.notifications">
-                <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{notification.taskId}}">{{notification.text}}</a></div>
+                <div class="container">
+                  <div class="content">
+                    <i class="icon ion-happy-outline"></i>&nbsp;&nbsp;
+                    <a href="#/tab/category/{{notification.taskId}}">{{notification.notificationText}}</a>
+                  </div>
+                  <div class="deleteButton" ng-click="removeNotification(notification)">
+                    <h2> &#10006; <h2>
+                  </div>
+                </div>
               </ion-item>
             </ion-list>
           </div>
@@ -34,8 +42,17 @@
             My Listings
           </h1>
           <ion-list>
-            <ion-item ng-repeat="task in user.pendingTasks">
-              <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task}}">{{task}}</a></div>
+            <ion-item ng-repeat="task in pendingTasks">
+              <div class="container">
+                <div class="content">
+                  <i class="icon ion-happy-outline"></i>&nbsp;&nbsp;
+                  <a href="#/tab/category/{{task._id}}">{{task.name}}</a>
+                  <p> Created on: {{task.dateCreated | date : longDate }}</p>
+                </div>
+                <div class="deleteButton" ng-click="remove(task)">
+                  <h2> &#10006; <h2>
+                </div>
+              </div>
             </ion-item>
           </ion-list>
         <div>
@@ -43,8 +60,17 @@
             Interested Listings
           </h1>
           <ion-list>
-            <ion-item ng-repeat="task in user.interestedTasks">
-              <div class="item"><i class="icon ion-happy-outline"></i>&nbsp;&nbsp;<a href="#/tab/category/{{task}}">{{task}}</a></div>
+            <ion-item ng-repeat="task in interestedTasks">
+              <div class="container">
+                <div class="content">
+                  <i class="icon ion-happy-outline"></i>&nbsp;&nbsp;
+                  <a href="#/tab/category/{{task._id}}">{{task.name}}</a>
+                  <p> Created on: {{task.dateCreated | date : longDate }}</p>
+                </div>
+                <div class="deleteButton" ng-click="removeInterest(task)">
+                  <h2> &#10006; <h2>
+                </div>
+              </div>
             </ion-item>
           </ion-list>
         </div>

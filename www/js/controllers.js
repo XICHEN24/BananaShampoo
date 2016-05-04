@@ -435,9 +435,12 @@ angular.module('starter.controllers', ['ngCookies'])
   }
 }])
 
-.controller('UserProfileCtrl', ['$scope', '$http', '$cookies', 'Users', function($scope, $http, $cookies, Users) {
+.controller('UserProfileCtrl', ['$scope', '$http', '$cookies', 'Users', 'Tasks', function($scope, $http, $cookies, Users, Tasks) {
 
   var userId = $cookies.get('userId');
+  console.log('hello');
+
+  document.getElementById('uploadFile').addEventListener('change', uploadFile, false);
 
   Users.getByUserId(userId).success(function(data){
     var user = data.data;
@@ -447,29 +450,30 @@ angular.module('starter.controllers', ['ngCookies'])
 
     if(user.profilePicture === undefined || user.profilePicture === "")
     {
-      document.getElementById('userImage').style.backgroundImage = "url('../img/defaultpfpic.png')";
+      document.getElementById('userImage').style.backgroundImage = "url('../img/defaultprofile.png')";
     }
     else
     {
       document.getElementById('userImage').style.backgroundImage = "url('"+user.profilePicture+"')";
     }
 
+    $scope.pendingTasks = [];
+    for (var i = 0; i < user.pendingTasks.length; i++)
+    {
+      Tasks.getByTaskId(user.pendingTasks[i]).success(function(data){
+        $scope.pendingTasks.push(data.data);
+      });
+    }
+
+    $scope.interestedTasks = [];
+    for (var i = 0; i < user.interestedTasks.length; i++)
+    {
+      Tasks.getByTaskId(user.interestedTasks[i]).success(function(data){
+        $scope.interestedTasks.push(data.data);
+      });
+    }
+
   });
-
-  document.getElementById('uploadFile').addEventListener('change', uploadFile, false);
-
-  /*
-   $scope.user = { name: "Stefan Dao",
-   email: "sdao2@illinois.edu",
-   password: "Probably shouldn't be in plaintext",
-   pendingTasks: ['MyTask1', 'MyTask2'],
-   interestedTasks: ["Eat chicken", "Dont eat chicken", "Make a cheesecake"],
-   notifications: ["Hey guys", "This is a placeholder"],
-   dateCreated: new Date(),
-   profilePicture: { data: ""}
-   }
-   */
-
 
   function uploadFile(input)
   {
@@ -484,8 +488,6 @@ angular.module('starter.controllers', ['ngCookies'])
       reader.onload = (function(theFile) {
         return function(e) {
           // Render thumbnail.
-
-
           $scope.user.profilePicture =  e.target.result;
           document.getElementById('userImage').style.backgroundImage = "url('"+e.target.result+"')";
 
@@ -501,6 +503,62 @@ angular.module('starter.controllers', ['ngCookies'])
       console.log('uploading invalid file');
     }
   }
+
+  $scope.remove = function(task) {
+    var index = $scope.pendingTasks.indexOf(task);
+    $scope.pendingTasks.splice(index, 1);
+
+    index = $scope.user.pendingTasks.indexOf(task._id);
+    $scope.user.pendingTasks.splice(index, 1);
+
+    Users.put($scope.user._id, $scope.user).success(function(data){
+      console.log("Removed task from pendingTasks of user " + $scope.user._id);
+    });
+
+    var interestedUsers = task.interestedUsers;
+
+    for ( var i = 0; i < interestedUsers.length; i++)
+    {
+      Users.getByUserId(interestedUsers[i]).success(function(data){
+        var user = data.data;
+        var ind = user.interestedTasks.indexOf(task._id);
+
+        if (ind !== -1)
+        {
+          user.interestedTasks.splice(ind, 1);
+        }
+        Users.put(user._id, user).success(function(data){
+          console.log("Removed task from interestedTasks of user " + user._id);
+        });
+      });
+    }
+
+    Tasks.delete(task._id).success(function(data){
+      console.log("Deleted task from MongoDB");
+    });
+  }
+
+  $scope.removeInterest = function(task) {
+    var index = $scope.interestedTasks.indexOf(task);
+    $scope.interestedTasks.splice(index, 1);
+
+    index = $scope.user.interestedTasks.indexOf(task._id);
+    $scope.user.interestedTasks.splice(index, 1);
+
+    Users.put($scope.user._id, $scope.user).success(function(data){
+      console.log("Removed task from interestedTasks of user " + $scope.user._id);
+    });
+  }
+
+  $scope.removeNotification = function(notification) {
+    var index = $scope.user.notifications.indexOf(notification);
+    $scope.user.notifications.splice(index, 1);
+
+    Users.put($scope.user._id, $scope.user).success(function(data){
+      console.log("Removed notification from notifications of user " + $scope.user._id);
+    });
+  }
+
 }])
 
 .controller('SettingsController', ['$scope', '$window', function($scope, $window) {

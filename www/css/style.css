@@ -2,6 +2,25 @@
   color:black;
 }
 
+.container {
+  display: inline;
+  color: black;
+}
+
+.content {
+  display: inline-block;
+  float: left;
+}
+
+.deleteButton {
+  position:absolute;
+  right:10px;
+  cursor: pointer;
+}
+
+.deleteButton h2 {
+  color: red;
+}
 .title{
   padding:0px;
   margin:0px;
@@ -26,15 +45,14 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background-image: url('../stud.jpg');
+  background-image: url('../img/defaultprofile.png');
   background-repeat: no-repeat;
   background-size: cover;
   border-width: 2px;
 }
 
 .placeholder {
-  background-color: red;
-  border-width: 1px;
+  border-width: 2px;
 }
 
 /* Empty. Add your own CSS if you like */
