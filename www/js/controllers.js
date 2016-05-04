@@ -341,7 +341,8 @@ angular.module('starter.controllers', ['ngCookies'])
       $http.get('http://localhost:4000/api/users/' + temp).success(function (data) {
         $scope.logname = data.data.name;
         $scope.logemail = data.data.email;
-
+        console.log("log in name");
+        console.log($scope.logname);
 
         var ele = {
           "msg": $scope.addmsg.text,
