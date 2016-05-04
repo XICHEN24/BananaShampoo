@@ -18,8 +18,14 @@
       </ion-item>
     </ion-list>
     <ion-list>
+      <ion-item>
+        <textarea ng-model="addmsg.text" placeholder="Post your message here ..." style="width: 80%; margin-left: 10%; min-height: 200px; font-size: large;">
+        </textarea>
+      </ion-item>
+      <button class="button button-energized button-small"  ng-click=addMessage()>Add Message</button>
+
+
       <ion-item ng-repeat="msg in message track by $index">
-        {{msg}}
         <span style="color:dodgerblue">Message:</span> &nbsp;&nbsp;{{msg}}</div>
       </ion-item>
     </ion-list>

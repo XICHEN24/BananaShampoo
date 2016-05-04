@@ -120,7 +120,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
   var temp = $cookies.get('userId');
   $cookies.put('userId',temp);
-  console.log(temp);
+  //console.log(temp);
 
   $http.get('http://localhost:4000/api/tasks?where={"category": "Study"}').success(function(data){
     $scope.study = data.data;
@@ -138,7 +138,7 @@ angular.module('starter.controllers', ['ngCookies'])
   });
   $http.get('http://localhost:4000/api/tasks?where={"category": "Food"}').success(function(data){
     $scope.food = data.data;
-    console.log(data.data);
+    //console.log(data.data);
 
   }).error(function(err){
     console.log(err);
@@ -258,30 +258,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
     $scope.exchangetask = false;
     $scope.exchangelimit = 5;
-  }/*
-  $scope.showDaily = function(){
-    $scope.studytask = false;
-    $scope.studylimit = 5;
-
-    $scope.sporttask = false;
-    $scope.sportlimit = 5;
-
-    $scope.foodtask = false;
-    $scope.foodlimit = 5;
-
-    $scope.dailytask = true;
-    //$scope.dailylimit = 5;
-
-    $scope.traveltask = false;
-    $scope.travellimit = 5;
-
-    $scope.renttask = false;
-    $scope.rentlimit = 5;
-
-    $scope.exchangetask = false;
-    $scope.exchangelimit = 5;
-
-  } */
+  }
   $scope.showTravel = function(){
     $scope.category = 'Travel';
     $scope.studytask = false;
@@ -376,21 +353,77 @@ angular.module('starter.controllers', ['ngCookies'])
 
 }])
 
-.controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
-  $http.get('http://localhost:4000/api/tasks/'+$stateParams._id).success(function(data){
+.controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http','$cookies', function($scope, $stateParams, $http, $cookies) {
+  var temp = $cookies.get('userId');
+  $cookies.put('userId',temp);
+  //console.log(temp);
+  $scope.addmsg = {text:""};
+  $scope.addMessage = function() {
+    //console.log($scope.addmsg);
+    //console.log("hi");
+      $http.get('http://localhost:4000/api/tasks/'+$stateParams._id).success(function(data) {
+        $scope.taskdetail = data.data;
+        $scope.message = $scope.taskdetail.messages;
+        console.log(data.data);
+        var array = $scope.message;
+        array.push($scope.addmsg.text);
+        var userarray = $scope.taskdetail.interestedUsers;
+        userarray.push($cookies.get('userId'));
+        //console.log(array);
+        var newtask = {
+          "interestedUsers": userarray,
+          "messages": array
+        }
+        console.log(newtask);
+        $http.put('http://localhost:4000/api/tasks/'+$stateParams._id,newtask).success(function(data){
+          console.log(data.data);
+        }).error(function(err){
+          console.log(err);
+        })
+/*
+        var temp2 = $cookies.get('userId');
+        $http.get('http://localhost:4000/api/users/'+temp2).success(function(data) {
+          $scope.interest = data.data.interestedTasks;
+          var interestarray = data.data.interestedTasks;
+          interestarray.push($stateParams._id);
+
+          var newuser = {
+            "interestedTasks": interestarray
+          }
+          console.log("interestedTaks:")
+          console.log(newuser);
+          $http.put('http://localhost:4000/api/users/'+temp2,newuser).success(function(data) {
+            console.log(data.data);
+          }).error(function(err){
+            console.log(err);
+          })
+        }).error(function(err){
+          console.log(err);
+        })
+*/
+      }).error(function(err){
+        console.log(err);
+      });
+  }
+
+
+
+
+    $http.get('http://localhost:4000/api/tasks/'+$stateParams._id).success(function(data){
     $scope.taskdetail = data.data;
     $scope.message = $scope.taskdetail.messages;
     //console.log(data);
+
     $http.get('http://localhost:4000/api/users/'+$scope.taskdetail.assignedUser).success(function(data){
       $scope.userdetail = data.data;
       console.log(data);
     }).error(function(err){
       console.log(err);
-    });
-
+    })
   }).error(function(err){
     console.log(err);
   });
+
 }])
 
 .controller('PostCtrl',['$scope', '$cookies', 'Tasks', 'Users', function($scope, $cookies, Tasks, Users) {
