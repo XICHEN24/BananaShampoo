@@ -16,8 +16,8 @@ starterServices.factory('Users', function($http, $window) {
     },
     delete: function(userID) {
       var baseUrl = $window.sessionStorage.baseurl;
-      console.log(baseUrl + '/api/users/');
       var baseUrl = 'http://localhost:4000';
+      console.log(baseUrl + '/api/users/');
       //alert($http.delete(baseUrl+'/api/users/'+id));
       //console.log(id);
       //id ="56fe48f9711a539f06af0db0";
@@ -25,17 +25,16 @@ starterServices.factory('Users', function($http, $window) {
     },
     put: function(userID, user) {
       var baseUrl = $window.sessionStorage.baseurl;
-      console.log(baseUrl + '/api/users/'+userID);
+      //console.log(baseUrl + '/api/users/'+userID);
       var baseUrl = 'http://localhost:4000';
-      //alert($http.delete(baseUrl+'/api/users/'+id));
-      //console.log(id);
-      //id ="56fe48f9711a539f06af0db0";
+      console.log(baseUrl + '/api/users/'+userID);
       return $http.put(baseUrl + '/api/users/' + userID, user);
     },
     getByUserId: function(userID) {
       var baseUrl = $window.sessionStorage.baseurl;
-      console.log(baseUrl + '/api/users/');
+      //console.log(baseUrl + '/api/users/');
       var baseUrl = 'http://localhost:4000';
+      console.log(baseUrl + '/api/users/');
       return $http.get(baseUrl + '/api/users/'+userID);
     }
   }
