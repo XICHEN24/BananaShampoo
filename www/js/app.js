@@ -101,6 +101,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     })
 
     .state('tab.userprofile', {
+      cache: false,
       url: '/userprofile',
       views: {
         'tab-userprofile': {
