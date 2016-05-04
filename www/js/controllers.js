@@ -61,14 +61,6 @@ angular.module('starter.controllers', ['ngCookies'])
   $scope.formEmail = {text:""}
   $scope.formPassword = {text:""}
   $scope.failMessage = "";
-  /*
-  Users.get().success(function(data) {
-      $scope.Users = data;
-    })
-    .error(function(data) {
-      console.log('Error: ' + data);
-    });
-    */
 
   $scope.createUser = function() {
     //alert("I cliked here");
@@ -93,27 +85,6 @@ angular.module('starter.controllers', ['ngCookies'])
   };
 
 }])
-
-.controller('ChatsCtrl', function($scope, Chats, $cookies) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  var temp = $cookies.get('userId');
-  console.log(temp);
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
-
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
 
 .controller('CategoryCtrl', ['$scope', '$http', 'Users', '$window','$cookies', function($scope, $http, Users, $window,$cookies) {
 
@@ -379,34 +350,66 @@ angular.module('starter.controllers', ['ngCookies'])
         }).error(function(err){
           console.log(err);
         })
-/*
-        var temp2 = $cookies.get('userId');
-        $http.get('http://localhost:4000/api/users/'+temp2).success(function(data) {
-          $scope.interest = data.data.interestedTasks;
-          var interestarray = data.data.interestedTasks;
-          interestarray.push($stateParams._id);
-
-          var newuser = {
-            "interestedTasks": interestarray
-          }
-          console.log("interestedTaks:")
-          console.log(newuser);
-          $http.put('http://localhost:4000/api/users/'+temp2,newuser).success(function(data) {
-            console.log(data.data);
-          }).error(function(err){
-            console.log(err);
-          })
-        }).error(function(err){
-          console.log(err);
-        })
-*/
       }).error(function(err){
         console.log(err);
       });
   }
 
+  $scope.setMyFavorite = function() {
 
+    if (!clickSetMyFavorite) {
+      clickSetMyFavorite = true;
+      $scope.favorite = $sce.trustAsHtml("This post has been added to your favorite list!");
+      myStyle = "{'background-color':'yellow'}"
 
+      Users.getByUserId($scope.currentLogInUser).success(function(user) {
+        var userData = user.data; // This is the whole user object
+        $scope.currentLogInUserData = userData;
+        userData.interestedTasks.push($stateParams._id);
+
+        //console.log(interestedTasksTemp);
+        //console.log(user);
+        Users.put(userData._id, userData).success(function(data) {
+          //console.log("Updated interestedTasks of the user")
+        });
+      }).error(function(e) {
+        console.log("updateNotification UserSchema error!");
+      });
+
+      Tasks.getByTaskId($stateParams._id).success(function(task) {
+        var taskData = task.data;
+        //console.log(taskData);
+        //console.log(taskData.interestedUsers);
+        taskData.interestedUsers.push($cookies.get('userId'));
+        //console.log(taskData.interestedUsers);
+        Users.getByUserId(task.data.assignedUser).success(function(userPost) {
+          console.log(userPost);
+          var userData = userPost.data;
+          console.log(userData);
+          userData.notifications.push(
+            {
+              'taskId' : taskData._id,
+              'notificationText' : "User " + $scope.currentLogInUserData.name + " is now following your post '" + taskData.name + "'!"
+            }
+          );
+          console.log($scope.currentLogInUserData.name);
+          Users.put(userData._id, userData).success(function(data) {
+            console.log("Updated notifications of the post user");
+          });
+        }).error(function(e) {
+          console.log("error when updating postUser notifications!")
+        });
+
+      }).error(function(e) {
+        console.log("updateNotification TaskSchema error!");
+      });
+
+    } else {
+      clickSetMyFavorite = false;
+      $scope.favorite = $sce.trustAsHtml("This post has been took off from your favorite list!");
+      myStyle = { 'background-color': 'grey' }
+    }
+  }
 
     $http.get('http://localhost:4000/api/tasks/'+$stateParams._id).success(function(data){
     $scope.taskdetail = data.data;
@@ -433,38 +436,37 @@ angular.module('starter.controllers', ['ngCookies'])
   $scope.assignedUser = $cookies.get('userId');
   $scope.completed = false;
 
-  $scope.submitPost = function () {
+  if ($scope.assignedUser == null) {
 
-    Users.getByUserId($scope.assignedUser).success(function (userdata) {
+    errorMessage = "You have not log in yet. Please Log In first."
 
-      var user = userdata.data;
+    $scope.errorPopUp = $sce.trustAsHtml(errorMessage);
+  }
 
-      var post = {
-        name: $scope.name.text,
-        category: $scope.category.text,
-        description: $scope.description.text,
-        assignedUser: $scope.assignedUser,
-        assignedUserName: user.name,
-        completed: false
-      };
-      console.log(post);
-      Tasks.post(post).success(function (data) {
-        window.location.href = 'index.html#/tab/category';
-        var task = data.data;
-        user.pendingTasks.push(task._id);
-        Users.put(user._id, user).success(function(data){
-          console.log("Updated user");
-          console.log(user);
+
+  if ($scope.assignedUser != null) {
+    $scope.submitPost = function() {
+
+      var user = Users.getByUserId($scope.assignedUser).success(function(user) {
+
+        var post = {
+          name: $scope.name.text,
+          category: $scope.category.text,
+          description: $scope.description.text,
+          assignedUser: $scope.assignedUser,
+          assignedUserName: user.data.name,
+          completed: false
+        };
+        console.log(post);
+        Tasks.post(post).success(function(data) {
+          window.location.href = 'index.html#/tab/category';
         }).error(function(e) {
-          alert(e);
+          alert(e)
         });
-
-      }).error(function (e) {
+      }).error(function(e) {
         alert(e)
       });
-    }).error(function (e) {
-      alert(e)
-    });
+    }
   }
 }])
 
