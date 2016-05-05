@@ -30,6 +30,12 @@
 
 .inner {
   margin: 0 auto;
+  font-family: monaco;
+  font-weight: bold;
+}
+.postmsg{
+  font-family: monaco;
+  font-size:10pt;
 }
 
 .userInformation {
@@ -46,13 +52,17 @@
   font-size: 20pt;
 }
 .postinfo{
-  font-family: Verdana;
+  //font-family: Verdana;
+  font-family: 'Franklin Gothic Medium';
+}
+.titlestyle{
+  font-size:15pt;
 }
 .msg{
   margin:10px;
 }
 .postmsg{
-  display:inline-block;
+  //display:inline-block;
 }
 .userImage {
   margin-left: auto;

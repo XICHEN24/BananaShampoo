@@ -2,8 +2,8 @@
   <ion-content class="padding">
     <ion-list class="postinfo">
       <ion-item>
-        <div class="item"><span style="color:dodgerblue"><strong>Title:</strong></span> &nbsp;&nbsp;{{taskdetail.name}}
-        <button class="button button-energized button-middle" ng-click="setMyFavorite()" style="float:right;" ng-style="myStyle">Favorite</button></div>
+        <div class="item"><span style="color:dodgerblue" class="titlestyle"> {{taskdetail.name}}</span>
+        <button class="button button-energized button-small" ng-click="setMyFavorite()" style="float:right;" ng-style="myStyle"><strong>&nbsp;Favorite&nbsp;</strong></button></div>
         <p ng-bind-html="favorite" class="help-block" style="color:white; background-color:green; font-size: 1.5em; width: 600px; text-align: center;"></p>
       </ion-item>
       <ion-item>
@@ -26,8 +26,8 @@
         </div>
         <div class = "postmsg">
           <div class="msg"><span style="color:dodgerblue;fontWeight:normal" ><strong>Message:</strong></span>&nbsp;{{msg.msg}}</div>
-          <div class="msg"><span style="color:dodgerblue;fontWeight:bold"><strong>Post by:&nbsp;&nbsp;&nbsp;</strong></span>{{msg.name}}&nbsp;&nbsp;</div>
-          <div class="msg"><span style="color:dodgerblue;fontWeight:bold"><strong>Contact:&nbsp;&nbsp;&nbsp;</strong></span><a ng-href="mailto:{{msg.email}}">{{msg.email}}</a></div>
+          <div class="msg"><span style="color:dodgerblue;fontWeight:bold"><strong>Post by:&nbsp;</strong></span>{{msg.name}}&nbsp;&nbsp;</div>
+          <div class="msg"><span style="color:dodgerblue;fontWeight:bold"><strong>Contact:&nbsp;</strong></span><a ng-href="mailto:{{msg.email}}">{{msg.email}}</a></div>
         </div>
       </ion-item>
       <br>
