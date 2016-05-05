@@ -2,15 +2,19 @@
   <ion-content class="padding">
     <ion-list class="postinfo">
       <ion-item>
-        <div class="item"><span style="color:dodgerblue" class="titlestyle"> {{taskdetail.name}}</span>
-        <button class="button button-energized button-small" ng-click="setMyFavorite()" style="float:right;" ng-style="myStyle"><strong>&nbsp;Favorite&nbsp;</strong></button></div>
+        <span style="color:dodgerblue" class="titlestyle"> {{taskdetail.name}}</span>
+        <button class="button button-energized button-small" ng-click="setMyFavorite()" style="float:right;" ng-style="myStyle"><strong>&nbsp;Favorite&nbsp;</strong></button>
         <p ng-bind-html="favorite" class="help-block" style="color:white; background-color:green; font-size: 1.5em; width: 600px; text-align: center;"></p>
       </ion-item>
       <ion-item>
-        <div class="item"><span style="color:dodgerblue"><strong>Post By:</strong> </span>&nbsp;&nbsp;{{taskdetail.assignedUserName}}</div>
+        <span style="color:dodgerblue"><strong>Post By:</strong> </span>&nbsp;&nbsp;{{taskdetail.assignedUserName}}
       </ion-item>
       <ion-item>
-        <div class="item"><span style="color:dodgerblue"><strong>Post Date:</strong></span> &nbsp;&nbsp;{{taskdetail.dateCreated}}</div>
+        <span style="color:dodgerblue"><strong>Description:</strong> </span>&nbsp;&nbsp;
+        {{taskdetail.description}}
+      </ion-item>
+      <ion-item>
+       <span style="color:dodgerblue"><strong>Post Date:</strong></span> &nbsp;&nbsp;{{taskdetail.dateCreated}}
       </ion-item>
       <ion-item>
         <div class="item"><i class="icon ion-person"></i>&nbsp;&nbsp;<span style="color:red"><strong>Contact:</strong></span> &nbsp;&nbsp;{{userdetail.name}}</div>
