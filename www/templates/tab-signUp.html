@@ -22,18 +22,18 @@
                             <h4><span style="font-family: monaco"><strong>Email</strong></span><span style="color:red;margin-right: 100px;font-family: monaco">*</span></h4>
                             <hr>
                             <input type="email" class="form-control input-lg text-center" placeholder="Your Email" name="email" ng-model="formEmail.text" style="resize:horizontal; width:300px;" required>
-                            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block" style="color:white; background-color: red; font-size: 1.5em; width: 350px; display: inline;">Please enter a valid email.</p>
+                            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block" style="color:red; background-color: white; font-size: 1em; width: 350px; display: inline;">Please enter a valid email.</p>
                             <hr>
                             <h4><span style="font-family: monaco"><strong>Password</strong></span><span style="color:red;margin-right: 100px;font-family: monaco">*</span></h4>
                             <hr>
                             <input type="password" class="form-control input-lg text-center" placeholder="Password" name="password" ng-model="formPassword.text" style="resize:horizontal; width:300px;" required>
-                            <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block" style="color:white; background-color: #68ffc4; font-size: 1.5em; width: 350px; display: inline;">The Password is required.</p>
+                            <p ng-show="userForm.password.$invalid && !userForm.password.$pristine" class="help-block" style="color:red; background-color: white; font-size: 1em; width: 350px; display: inline;">The Password is required.</p>
                             <hr>
                         </div>
                         <!-- createUser() WILL CREATE NEW USERS -->
                         <button type="submit" class="button button-balanced	button-full" ng-click="createUser()" ng-disabled="userForm.$invalid">Sign Up</button>
-                        <h3 style="color:red;">{{failMessage}}</h3>
-                        <p ng-bind-html="UserAdded" class="help-block" style="color:white; background-color:green; font-size: 1.5em; width: 350px;"></p>
+                        <h3 style="color:red;font-family: monaco">{{failMessage}}</h3>
+                        <p ng-bind-html="UserAdded" class="help-block" style="color:red; background-color:white; font-size: 1em; width: 350px;"></p>
                         <p>You need to enter an valid email, and valid password and non-empty name in order to submit</p>
                         <hr>
                         <p>Already have an account?</p>
