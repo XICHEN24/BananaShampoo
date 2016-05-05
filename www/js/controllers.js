@@ -372,14 +372,21 @@ angular.module('starter.controllers', ['ngCookies'])
 
         Tasks.put($stateParams._id, $scope.taskdetail).success(function (task) {
 
+          console.log(task);
+          console.log(task.data)
+          console.log("Assigned user = " + task.data.assignedUser);
+
           $http.get('http://localhost:4000/api/users/' + task.data.assignedUser).success(function (userPost) {
             var userData = userPost.data;
             userData.notifications.push({
               'taskId': task.data._id,
-              'notificationText': "User " + $scope.logname + " is now following your post '" + task.data.name + "'!"
+              'notificationText': "User " + $scope.logname + " wrote new message on your task '" + task.data.name + "'!"
             });
 
+            console.log(userData)
+
             Users.put(userData._id, userData).success(function (data) {
+              console.log("hello");
               console.log("Updated notifications of the post user");
               console.log(data.data)
             });
@@ -390,6 +397,18 @@ angular.module('starter.controllers', ['ngCookies'])
 
           $http.get('http://localhost:4000/api/users/' + $cookies.get('userId')).success(function (userPost) {
             var userData = userPost.data;
+
+            var index = userData.interestedTasks.indexOf($scope.taskdetail._id);
+            if (index === -1 && userData._id !== $scope.taskdetail.assignedUser)
+            {
+              console.log('updating interested tasks')
+              userData.interestedTasks.push($scope.taskdetail._id);
+            }
+            else
+            {
+              console.log("index = " + index +" " + userData._id + " " +  $scope.taskdetail.assignedUser);
+            }
+
             userData.notifications.push({
               'taskId': task.data._id,
               'notificationText': "you are now following the post " + task.data.name + " of " + task.data.assignedUserName + "'!"
@@ -490,48 +509,47 @@ angular.module('starter.controllers', ['ngCookies'])
 
 //.controller('CategoryDetailCtrl', ['$scope', '$stateParams', '$http', '$cookies','$sce','Users','Tasks', function($scope, $stateParams, $http, $cookies, $sce, Users, Tasks) {
 
+.controller('PostCtrl',['$scope', '$cookies', 'Tasks', 'Users', function($scope, $cookies, Tasks, Users) {
 
+  $scope.name = {text:""};
+  $scope.category = {text:"study"};
+  $scope.description = {text:""};
+  $scope.assignedUser = $cookies.get('userId');
+  $scope.completed = false;
 
-.controller('PostCtrl', ['$scope', '$cookies', 'Tasks', 'Users', function($scope, $cookies, Tasks, Users) {
+  $scope.submitPost = function () {
 
-    $scope.name = { text: "" };
-    $scope.category = { text: "study" };
-    $scope.description = { text: "" };
-    $scope.assignedUser = $cookies.get('userId');
-    $scope.completed = false;
+    Users.getByUserId($scope.assignedUser).success(function (userdata) {
 
-    if ($scope.assignedUser == null) {
+      var user = userdata.data;
 
-        errorMessage = "You have not log in yet. Please Log In first."
+      var post = {
+        name: $scope.name.text,
+        category: $scope.category.text,
+        description: $scope.description.text,
+        assignedUser: $scope.assignedUser,
+        assignedUserName: user.name,
+        completed: false
+      };
+      console.log(post);
+      Tasks.post(post).success(function (data) {
+        window.location.href = 'index.html#/tab/category';
+        var task = data.data;
+        user.pendingTasks.push(task._id);
+        Users.put(user._id, user).success(function(data){
+          console.log("Updated user");
+          console.log(user);
+        }).error(function(e) {
+          alert(e);
+        });
 
-        $scope.errorPopUp = $sce.trustAsHtml(errorMessage);
-    }
-
-
-    if ($scope.assignedUser != null) {
-        $scope.submitPost = function() {
-
-            var user = Users.getByUserId($scope.assignedUser).success(function(user) {
-
-                var post = {
-                    name: $scope.name.text,
-                    category: $scope.category.text,
-                    description: $scope.description.text,
-                    assignedUser: $scope.assignedUser,
-                    assignedUserName: user.data.name,
-                    completed: false
-                };
-                console.log(post);
-                Tasks.post(post).success(function(data) {
-                    window.location.href = 'index.html#/tab/category';
-                }).error(function(e) {
-                    alert(e)
-                });
-            }).error(function(e) {
-                alert(e)
-            });
-        }
-    }
+      }).error(function (e) {
+        alert(e)
+      });
+    }).error(function (e) {
+      alert(e)
+    });
+  }
 }])
 
 .controller('UserProfileCtrl', ['$scope', '$http', '$cookies', 'Users', 'Tasks', function($scope, $http, $cookies, Users, Tasks) {
