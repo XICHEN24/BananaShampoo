@@ -493,7 +493,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
 
 
-.controller('PostCtrl', ['$scope', '$cookies', 'Tasks', 'Users', function($scope, $cookies, Tasks, Users) {
+.controller('PostCtrl', ['$scope', '$cookies', 'Tasks', 'Users','$sce', function($scope, $cookies, Tasks, Users, $sce) {
 
     $scope.name = { text: "" };
     $scope.category = { text: "study" };
