@@ -1,36 +1,47 @@
 <ion-view view-title="Post">
-    <ion-content>
-        <div style="margin-top: 45px;">
-            <form name="userPostForm" novalidate>
-                <p ng-bind-html="errorPopUp" class="help-block" style="color:white; background-color:red; font-size: 1.5em; width: 20%; text-align: center; margin-left: 40%;"></p>
-                <div class="form-group">
-                    <ion-item>
-                        <input type="text" ng-model="name.text" name="name" placeholder="Title" style="width: 50%; margin-left: 25%; font-size: x-large;" class="form-control input-lg text-center" required>
-                        <p ng-show="userPostForm.name.$invalid && !userPostForm.name.$pristine" class="help-block" style="color:white; background-color: red; font-size: 1.5em; width: 350px; display: inline;">Please enter a valid Title.</p>
-                    </ion-item>
-                    <ion-item>
-                        <div style="float: right">
-                            <label>
-                                Category:
-                            </label>
-                            <select ng-model="category.text" style="font-size: large;">
-                                <option value="Study">Study</option>
-                                <option value="Sports">Sports</option>
-                                <option value="Food">Food</option>
-                                <option value="Trade">Trade</option>
-                                <option value="Rent">Rent</option>
-                                <option value="Travel">Travel</option>
-                            </select>
-                        </div>
-                    </ion-item>
-                    <ion-item>
-                        <textarea type="text" name="description" class="form-control input-lg" ng-model="description.text" placeholder="Post your content here ..." style="width: 80%; margin-left: 10%; min-height: 200px; font-size: large;" required>
-                        </textarea>
-                        <p ng-show="userPostForm.description.$invalid && !userPostForm.description.$pristine" class="help-block" style="color:white; background-color: red; font-size: 1.5em; width: 350px; display: inline;">Please enter a valid Description.</p>
-                    </ion-item>
-                </div>
-                <button type="submit" class="button button-block" style="font-size: large; border-radius: 5px; width: 20%; margin-left: 40%; background-color: #66ffff" ng-disabled="userPostForm.$invalid || !assignedUser" ng-click="submitPost()">Send</button>
-            </form>
-        </div>
-    </ion-content>
+    <div style="background-image: url('../img/background1.jpg'); background-size: 1800px 1600px;" >
+    <!--<img src="../img/background1.jpg" style="width: 90%; height:200px; margin-top: -100px;"> -->
+        <ion-content>
+            <h1 id="title" class="text-center" style="color:skyblue; font-style: italic, sans-serif;">Banana Post Form</h1>
+            <div style="width:25%; float:right; margin-top: 200px;">
+                    <img src="../img/postForm2.jpg" style="width: 90%; height:50%; margin-top: -100px;">
+            </div>
+
+            <div style="width:25%; float:left; margin-top: 200px;">
+                    <img src="../img/banana.jpg" style="width: 90%; height:50%; margin-top: -100px;">
+            </div>
+            <div style="margin-top: 45px; width: 50%; margin-left: 20%;">
+                <form name="userPostForm" novalidate>
+                    <p ng-bind-html="errorPopUp" class="help-block" style="color:white; background-color:red; font-size: 1.5em; width: 20%; text-align: center; margin-left: 40%;"></p>
+                    <div class="form-group">
+                        <ion-item>
+                            <span><input type="text" ng-model="name.text" name="name" placeholder="Title" style="width: 50%; margin-left: 25%; font-size: x-large;" class="form-control input-lg text-center" required></span>
+                            <p ng-show="userPostForm.name.$invalid && !userPostForm.name.$pristine" class="help-block" style="color:white; background-color: red; font-size: 1.5em; width: 350px; display: inline;">Please enter a valid Title.</p>
+                        </ion-item>
+                        <ion-item>
+                            <div style="float: right">
+                                <label>
+                                    Category:
+                                </label>
+                                <select ng-model="category.text" style="font-size: large;">
+                                    <option value="Study">Study</option>
+                                    <option value="Sports">Sports</option>
+                                    <option value="Food">Food</option>
+                                    <option value="Trade">Trade</option>
+                                    <option value="Rent">Rent</option>
+                                    <option value="Travel">Travel</option>
+                                </select>
+                            </div>
+                        </ion-item>
+                        <ion-item>
+                            <textarea type="text" name="description" class="form-control input-lg" ng-model="description.text" placeholder="Post your content here ..." style="width: 80%; margin-left: 10%; min-height: 200px; font-size: large;" required>
+                            </textarea>
+                            <p ng-show="userPostForm.description.$invalid && !userPostForm.description.$pristine" class="help-block" style="color:white; background-color: red; font-size: 1.5em; width: 350px; display: inline;">Please enter a valid Description.</p>
+                        </ion-item>
+                    </div>
+                    <button type="submit" class="button button-block" style="font-size: large; border-radius: 5px; width: 20%; margin-left: 40%; background-color: #66ffff" ng-disabled="userPostForm.$invalid || !assignedUser" ng-click="submitPost()">Send</button>
+                </form>
+            </div>
+        </ion-content>
+    </div>
 </ion-view>
