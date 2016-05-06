@@ -379,7 +379,7 @@ angular.module('starter.controllers', ['ngCookies'])
                         var userData = userPost.data;
                         userData.notifications.push({
                             'taskId': task.data._id,
-                            'notificationText': "User " + $scope.logname + " wrote new message on your task '" + task.data.name + "'!"
+                            'notificationText': "User " + $scope.logname + " follows post '" + task.data.name + "'!"
                         });
 
                         console.log(userData)
@@ -407,7 +407,7 @@ angular.module('starter.controllers', ['ngCookies'])
 
                         userData.notifications.push({
                             'taskId': task.data._id,
-                            'notificationText': "you are now following the post " + task.data.name + " of " + task.data.assignedUserName + "'!"
+                            'notificationText': "Follow the post " + task.data.name + " of " + task.data.assignedUserName + "'!"
                         });
 
                         Users.put(userData._id, userData).success(function(data) {
@@ -466,7 +466,7 @@ angular.module('starter.controllers', ['ngCookies'])
                     console.log(userData);
                     userData.notifications.push({
                         'taskId': taskData._id,
-                        'notificationText': "User " + $scope.currentLogInUserData.name + " is now following your post '" + taskData.name + "'!"
+                        'notificationText': "User " + $scope.currentLogInUserData.name + " follows your post '" + taskData.name + "'!"
                     });
                     console.log($scope.currentLogInUserData.name);
                     Users.put(userData._id, userData).success(function(data) {

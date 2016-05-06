@@ -6,8 +6,8 @@
 
         </div>
         <div class="userInformation">
-          <h3> Name: {{ user.name  }}</h3>
-          <h3> Contact Email: {{ user.email }}</h3>
+          <h4 style="font-family: monaco"> Name: {{ user.name  }}</h4>
+          <h4 style="font-family: monaco"> Email: {{ user.email }}</h4>
           <h7> User since {{user.dateCreated | date:'yyyy-MM-dd' }}</h7>
         </div>
 
@@ -18,9 +18,9 @@
       </div>
       <div class="col col-80 placeholder">
         <div>
-          <h1>
+          <h3 style="font-family: monaco">
             Notifications
-          </h1>
+          </h3>
           <div>
             <ion-list>
               <ion-item ng-repeat="notification in user.notifications">
@@ -38,9 +38,9 @@
           </div>
         </div>
         <div>
-          <h1>
+          <h3 style="font-family: monaco">
             My Listings
-          </h1>
+          </h3>
           <ion-list>
             <ion-item ng-repeat="task in pendingTasks">
               <div class="container">
@@ -56,9 +56,9 @@
             </ion-item>
           </ion-list>
         <div>
-          <h1>
+          <h3 style="font-family: monaco">
             Interested Listings
-          </h1>
+          </h3>
           <ion-list>
             <ion-item ng-repeat="task in interestedTasks">
               <div class="container">
