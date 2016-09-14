@@ -1,6 +1,7 @@
 Banana Shampoo
 =====================
 
+Come and visit us at http://anu.zengineerhao.com/ </br>
 A platform for sending requests and calling peers to join activities. Built by inoic that can be compiled into web/iOS/Android app.
 
 ## Using this project
